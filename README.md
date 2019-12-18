@@ -7,3 +7,5 @@ Traduction française de la partie batch de NSC_Builder 0.97
 * Récupérer les fichiers de ce projet en le clonant ou en <a href="https://github.com/shadow2560/NSC_Builder-Batch-FR-Translation/archive/master.zip">cliquant ici</a>.
 * Extraire les fichiers du projet dans la version officielle de NSC_Builder (ne pas remplacer le fichier "readme.md" du projet original si vous cloner ce projet).
 * Lancer le fichier "NSCB_fr.bat".
+
+Merci à @fabriceunko de Logic-sunrise qui s'occupe de maintenir la traduction.
