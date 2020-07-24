@@ -51,7 +51,7 @@ if "%Extension%" EQU ".nsx" ( goto snfi )
 if "%Extension%" EQU ".xci" ( goto snfi )
 if "%Extension%" EQU ".nsz" ( goto snfi2 )
 if "%Extension%" EQU ".xcz" ( goto snfi2 )
-if "%Extension%" EQU ".nca" ( goto snfi_nca ) 
+if "%Extension%" EQU ".nca" ( goto snfi_nca )
 
 if /i "%bs%"=="1" goto g_file_content
 if /i "%bs%"=="2" goto g_content_list
@@ -92,7 +92,7 @@ if "%Extension%" EQU ".nsx" ( goto snfi )
 if "%Extension%" EQU ".xci" ( goto snfi )
 if "%Extension%" EQU ".nsz" ( goto snfi2 )
 if "%Extension%" EQU ".xcz" ( goto snfi2 )
-if "%Extension%" EQU ".nca" ( goto snfi_nca ) 
+if "%Extension%" EQU ".nca" ( goto snfi_nca )
 
 if /i "%bs%"=="1" goto g_file_content2
 if /i "%bs%"=="2" goto g_content_list2
@@ -129,7 +129,7 @@ call :logo
 echo ********************************************************
 echo Voir le contenu du NSP ou de la partition SECURE du XCI
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --ADVfilelist "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --ADVfilelist "%targt%"
 goto sc2
 
 :g_file_content2
@@ -138,7 +138,7 @@ call :logo
 echo ********************************************************
 echo Voir le contenu du NSZ ou de la partition SECURE du XCZ
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --ADVfilelist "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --ADVfilelist "%targt%"
 goto sc2_1
 
 :g_content_list
@@ -147,7 +147,7 @@ call :logo
 echo ********************************************************
 echo AFFICHER LE CONTENU NSP OU XCI ORGANISÉ PAR IDENTIFIANT
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --ADVcontentlist "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --ADVcontentlist "%targt%"
 goto sc2
 
 :g_content_list2
@@ -156,7 +156,7 @@ call :logo
 echo ********************************************************
 echo AFFICHER LE CONTENU NSP OU XCI ORGANISÉ PAR IDENTIFIANT
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --ADVcontentlist "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --ADVcontentlist "%targt%"
 goto sc2_1
 
 :n_info
@@ -165,7 +165,7 @@ call :logo
 echo ********************************************************
 echo NUT - INFO par BLAWAR
 echo ********************************************************
-%pycommand% "%nut%" -i "%targt%"
+%pycommand% "%squirrel%" -i "%targt%"
 echo.
 ECHO *************************************************************
 echo Souhaitez-vous copier ces informations dans un fichier texte?
@@ -183,8 +183,8 @@ goto n_info_wrong
 :n_info_print
 if not exist "%info_dir%" MD "%info_dir%">NUL 2>&1
 set "i_file=%info_dir%\%Name%-info.txt"
-%pycommand% "%nut%" -i "%targt%">"%i_file%"
-%pycommand% "%nut%" --strip_lines "%i_file%" "2"
+%pycommand% "%squirrel%" -i "%targt%">"%i_file%"
+%pycommand% "%squirrel%" --strip_lines "%i_file%" "2"
 ECHO Terminé.
 goto sc2
 
@@ -194,7 +194,7 @@ call :logo
 echo ***********************************************************
 echo Afficher les Informations et données sur le firmware requis
 echo ***********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --translate %transnutdb% --fw_req "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --translate %transnutdb% --fw_req "%targt%"
 goto sc2
 
 :f_info2
@@ -203,7 +203,7 @@ call :logo
 echo *******************************************************************
 echo AFFICHER LES INFORMATIONS ET LES DONNEES SUR LE FIRMWARE NECESSAIRE
 echo *******************************************************************
-%pycommand% "%nut%" -o "%info_dir%" --translate %transnutdb% --fw_req "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --translate %transnutdb% --fw_req "%targt%"
 
 goto sc2_1
 
@@ -213,7 +213,7 @@ call :logo
 echo ********************************************************
 echo Afficher les données CMT de META NCA dans NSP\XCI
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --Read_cnmt "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_cnmt "%targt%"
 if "%Extension%" EQU ".nsz" ( goto sc2_1 )
 if "%Extension%" EQU ".xcz" ( goto sc2_1 )
 goto sc2
@@ -224,7 +224,7 @@ call :logo
 echo ********************************************************
 echo Afficher les données CMT de META NCA dans NSP\XCI
 echo ********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --Read_cnmt "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_cnmt "%targt%"
 if "%Extension%" EQU ".nsz" ( goto sc2_1 )
 if "%Extension%" EQU ".xcz" ( goto sc2_1 )
 goto sc2_1
@@ -236,7 +236,7 @@ echo ********************************************************
 echo Afficher les données NACP du contrôle NCA dans NSP\XCI
 echo ********************************************************
 echo Mise en oeuve de la bibliotheque 0LIAM'S NACP
-%pycommand% "%nut%" -o "%info_dir%" --Read_nacp "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_nacp "%targt%"
 if "%Extension%" EQU ".nsz" ( goto sc2_1 )
 if "%Extension%" EQU ".xcz" ( goto sc2_1 )
 goto sc2
@@ -248,7 +248,7 @@ echo ********************************************************
 echo Afficher les données NACP du contrôle NCA dans NSP\XCI
 echo ********************************************************
 echo Mise en oeuve de la bibliotheque 0LIAM'S NACP
-%pycommand% "%nut%" -o "%info_dir%" --Read_nacp "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_nacp "%targt%"
 if "%Extension%" EQU ".nsz" ( goto sc2_1 )
 if "%Extension%" EQU ".xcz" ( goto sc2_1 )
 goto sc2_1
@@ -259,7 +259,7 @@ call :logo
 echo ***********************************************************
 echo Afficher les données du MAIN.NPDM du fichier NCA du NSP\XCI
 echo ***********************************************************
-%pycommand% "%nut%" -o "%info_dir%" --Read_npdm "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_npdm "%targt%"
 goto sc2
 
 
@@ -269,7 +269,7 @@ call :logo
 echo ********************************************************
 echo Vérification  NSP\XCI\NCA
 echo ********************************************************
-%pycommand% "%nut%" %buffer% -o "%info_dir%" -v "%targt%" 
+%pycommand% "%squirrel%" %buffer% -o "%info_dir%" -v "%targt%"
 
 goto sc2
 
@@ -279,7 +279,7 @@ call :logo
 echo ********************************************************
 echo Vérifier le fichier NSZ/XCZ
 echo ********************************************************
-%pycommand% "%nut%" %buffer% -o "%info_dir%" -v "%targt%" 
+%pycommand% "%squirrel%" %buffer% -o "%info_dir%" -v "%targt%"
 
 goto sc2_1
 
@@ -333,7 +333,7 @@ call :logo
 echo ********************************************************
 echo NUT - information par BLAWAR
 echo ********************************************************
-%pycommand% "%nut%" -i "%targt%"
+%pycommand% "%squirrel%" -i "%targt%"
 echo.
 ECHO *************************************************************
 echo Souhaitez-vous copier ces informations dans un fichier texte?
@@ -351,9 +351,9 @@ goto n_info_wrong_nca
 :n_info_print_nca
 if not exist "%info_dir%" MD "%info_dir%">NUL 2>&1
 set "i_file=%info_dir%\%Name%-info.txt"
-%pycommand% "%nut%" -i "%targt%">"%i_file%"
-%pycommand% "%nut%" -i "%targt%">"%i_file%"
-%pycommand% "%nut%" --strip_lines "%i_file%" "2"
+%pycommand% "%squirrel%" -i "%targt%">"%i_file%"
+%pycommand% "%squirrel%" -i "%targt%">"%i_file%"
+%pycommand% "%squirrel%" --strip_lines "%i_file%" "2"
 ECHO Terminé
 goto sc3
 
@@ -363,7 +363,7 @@ call :logo
 echo ************************************************************
 echo Afficher les données CMT de META NCA dans le fichier NSP\XCI
 echo ************************************************************
-%pycommand% "%nut%" -o "%info_dir%" --Read_cnmt "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_cnmt "%targt%"
 goto sc3
 
 :r_nacp_nca
@@ -373,7 +373,7 @@ echo *****************************************************************
 echo Afficher les données NACP de contrôle NCA dans le fichier NSP\XCI
 echo *****************************************************************
 echo Mise en oeuve de la bibliotheque 0LIAM'S NACP
-%pycommand% "%nut%" -o "%info_dir%" --Read_nacp "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_nacp "%targt%"
 goto sc3
 
 :r_npdm_nca
@@ -382,7 +382,7 @@ call :logo
 echo *************************************************************
 echo Afficher les données du MAIN.NPDM du fichier NCA dans NSP\XCI
 echo *************************************************************
-%pycommand% "%nut%" -o "%info_dir%" --Read_npdm "%targt%"
+%pycommand% "%squirrel%" -o "%info_dir%" --Read_npdm "%targt%"
 goto sc3
 
 :verify_nca
@@ -391,7 +391,7 @@ call :logo
 echo ********************************************************
 echo Vérifier un  NSP \ XCI \ NCA
 echo ********************************************************
-%pycommand% "%nut%" %buffer% -o "%info_dir%" -v "%targt%" 
+%pycommand% "%squirrel%" %buffer% -o "%info_dir%" -v "%targt%"
 goto sc3
 
 
@@ -399,12 +399,12 @@ goto sc3
 exit /B
 
 :logo
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -412,12 +412,11 @@ ECHO ---------------------------------------------------------------------------
 ECHO =============================     BY JULESONTHEROAD     =============================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
-ECHO "                    BASED IN THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                     VERSION %program_version%
-ECHO -------------------------------------------------------------------------------------                   
+ECHO "                    BASED ON THE WORK OF BLAWAR AND LUCA FRAGA                     "
+ECHO                                    VERSION %program_version%
+ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B

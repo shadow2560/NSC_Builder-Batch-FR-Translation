@@ -65,21 +65,25 @@ echo ................................................
 
 :manual_INIT
 endlocal
-ECHO ****************************************************
-echo Tapez "1" pour ajouter un nouveau dossier à la liste
-echo Tapez "2" pour ajouter un nouveau fichier à la liste
+ECHO **********************************************************************
+echo Tapez "1" pour ajouter un dossier à la liste via le sélecteur
+echo Tapez "2" pour ajouter un fichier à la liste via le sélecteur
+echo Tapez "3" pour sélectionner des fichiers via les bibliothèques locales 
+echo Tapez "4" pour sélectionner des fichiers via le navigateur de dossiers
 echo Tapez "0" pour revenir au menu du mode de sélection
-ECHO ****************************************************
+ECHO **********************************************************************
 echo.
-%pycommand% "%nut%" -t nsp nsx -tfile "%prog_dir%mnglist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp nsx -tfile "%prog_dir%mnglist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
 echo+ >"%uinput%"
 endlocal
 if /i "%eval%"=="0" exit /B
-if /i "%eval%"=="1" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=folder ext="nsp nsx" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=file ext="nsp nsx" )  2>&1>NUL
+if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=folder ext="nsp nsx" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=file ext="nsp nsx" )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%mnglist.txt" "extlist=nsp nsx" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%mnglist.txt" "extlist=nsp nsx" )
 goto checkagain
 echo.
 :checkagain
@@ -88,8 +92,10 @@ echo ..........................................................................
 echo "Glissez un autre fichier et appuyer sur entrer pour l'ajouter à la liste."
 echo.
 echo Tapez "1" pour commencer le traitement.
-echo Tapez "2" pour ajouter un nouveau dossier à la liste
-echo Tapez "3" pour ajouter un nouveau fichier à la liste
+echo Tapez "2" pour ajouter un autre dossier à la liste via le sélecteur
+echo Tapez "3" pour ajouter un autre fichier à la liste via le sélecteur
+echo Tapez "4" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "5" pour sélectionner des fichiers via le navigateur de dossiers
 echo Tapez "e" pour quitter.
 echo Tapez "i" pour voir la liste des fichiers à traiter
 echo Tapez "r" pour supprimer certains fichiers de la liste (en partant du bas).
@@ -99,7 +105,7 @@ ECHO *************************************************
 echo Ou tapez "0" pour revenir à la sélection du mode
 ECHO *************************************************
 echo.
-%pycommand% "%nut%" -t nsp nsx -tfile "%prog_dir%mnglist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp nsx -tfile "%prog_dir%mnglist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
@@ -108,8 +114,10 @@ endlocal
 
 if /i "%eval%"=="0" exit /B
 if /i "%eval%"=="1" goto start_cleaning
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=folder ext="nsp nsx" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=file ext="nsp nsx" )  2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=folder ext="nsp nsx" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%mnglist.txt" mode=file ext="nsp nsx" )  2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%mnglist.txt" "extlist=nsp nsx" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%mnglist.txt" "extlist=nsp nsx" )
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto showlist
 if /i "%eval%"=="r" goto r_files
@@ -134,7 +142,7 @@ set string=
 :update_list1
 if !pos1! GTR !pos2! ( goto :update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :update_list1 
+goto :update_list1
 :update_list2
 set string=%string%,
 set skiplist=%string%
@@ -196,7 +204,7 @@ if %vrepack%=="none" goto s_cl_wrongchoice
 cls
 call :program_logo
 CD /d "%prog_dir%"
-%pycommand% "%nut%" -lib_call management rename_nsx "%prog_dir%mnglist.txt"
+%pycommand% "%squirrel%" -lib_call management rename_nsx "%prog_dir%mnglist.txt"
 
 ECHO ------------------------------------------------------------
 ECHO *********** TOUS LES FICHIERS ONT ÉTÉ TRAITÉS! *************
@@ -245,17 +253,17 @@ echo          /_', "=. ';:;:;
 echo          @=:__,  \,;:;:'
 echo            _(\.=  ;:;;'
 echo           `"_(  _/="`
-echo            `"'		
+echo            `"'
 exit /B
 
 :program_logo
 
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -264,11 +272,10 @@ ECHO =============================     BY JULESONTHEROAD     ===================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
 ECHO "                    BASED ON THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                     VERSION %program_version% (NEW)
-ECHO -------------------------------------------------------------------------------------                   
+ECHO                                    VERSION %program_version%
+ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B
@@ -294,5 +301,3 @@ exit /B
 
 :salida
 exit /B
-
-

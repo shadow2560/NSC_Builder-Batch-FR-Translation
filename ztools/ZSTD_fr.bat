@@ -67,21 +67,25 @@ echo ................................................
 endlocal
 echo "GLISSEZ UN AUTRE FICHIER OU DOSSIER ET APPUYEZ SUR ENTER POUR AJOUTER DES ARTICLES À LA LISTE"
 echo.
-ECHO ***************************************************
-echo Tapez "1" pour ajouter un dossier à la liste
-echo Tapez "2" pour ajouter un fichier à la liste
-echo tapez "0" pour revenir au menu de sélection de mode
-ECHO ***************************************************
+ECHO **********************************************************************
+echo Tapez "1" pour ajouter un dossier à la liste via le sélecteur
+echo Tapez "2" pour ajouter un fichier à la liste via le sélecteur
+echo Tapez "3" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "4" pour sélectionner des fichiers via le navigateur de dossiers
+echo Tapez "0" pour revenir au menu de sélection de mode
+ECHO **********************************************************************
 echo.
-%pycommand% "%nut%" -t nsp xci nsz xcz -tfile "%prog_dir%zzlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci nsz xcz -tfile "%prog_dir%zzlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
 echo+ >"%uinput%"
 endlocal
 if /i "%eval%"=="0" exit /B
-if /i "%eval%"=="1" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
 
 goto checkagain
 echo.
@@ -91,8 +95,10 @@ echo ...........................................................................
 echo "GLISSEZ UN AUTRE FICHIER OU DOSSIER ET APPUYEZ SUR ENTER POUR AJOUTER DES ARTICLES À LA LISTE"
 echo.
 echo Tapez "1" pour commencer le traitement
-echo Tapez "2" pour ajouter un nouveau dossier à la liste
-echo Tapez "3" pour ajouter un nouveau fichier à la liste
+echo Tapez "2" pour ajouter un autre dossier à la liste via le sélecteur
+echo Tapez "3" pour ajouter un autre fichier à la liste via le sélecteur
+echo Tapez "4" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "5" pour sélectionner des fichiers via le navigateur de dossiers
 echo Tapez "e" pour quitter
 echo Tapez "i" pour voir la liste des fichiers à traiter
 echo Tapez "r" pour supprimer des fichiers (en partant du bas)
@@ -102,7 +108,7 @@ ECHO ******************************************************
 echo Ou tapez "0" pour revenir au menu de sélection de mode
 ECHO ******************************************************
 echo.
-%pycommand% "%nut%" -t nsp xci nsz xcz -tfile "%prog_dir%zzlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci nsz xcz -tfile "%prog_dir%zzlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
@@ -111,8 +117,10 @@ endlocal
 
 if /i "%eval%"=="0" exit /B
 if /i "%eval%"=="1" goto start
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto showlist
 if /i "%eval%"=="r" goto r_files
@@ -137,7 +145,7 @@ set string=
 :update_list1
 if !pos1! GTR !pos2! ( goto :update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :update_list1 
+goto :update_list1
 :update_list2
 set string=%string%,
 set skiplist=%string%
@@ -318,13 +326,13 @@ echo ***************************************
 echo Compression d'un NSP /XCI
 echo ***************************************
 CD /d "%prog_dir%"
-%pycommand% "%nut%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
+%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
 for /f "tokens=*" %%f in (zzlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%"
-REM %pycommand% "%nut%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --pararell "true" 
+%pycommand% "%squirrel%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%"
+REM %pycommand% "%squirrel%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --pararell "true"
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%zzlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%zzlist.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -349,9 +357,9 @@ echo    efficace que les threads et a une puissance de calcul plus faible
 echo     
 echo  + Si vous avez assez d'espace disque et de puissance de calcul 
 echo    n'ayez pas peur d'essayer d'utiliser 10 à 20 instances
-echo  + tqdm est un peu problématique lors de l'affichage des barres en mode pararell
-echo    avec les threads donc l'écran sera rafraichi 
-echo    Toute les 3s en mode pararell pour nettoyer les erreurs d'affichage.
+echo  + tqdm is a little wonky when printing pararell bars
+echo    with threads some so the screen will refresh
+echo    each 3s in pararell mode to clear bad prints.
 echo.
 ECHO ********************************************************
 echo Tapez "d" pour défaut (4 instances)
@@ -399,16 +407,16 @@ goto pcompress
 :pcompress
 cls
 call :program_logo
-echo *******************************
+echo ********************************
 echo Compression parallèle de NSP\XCI
-echo *******************************
+echo ********************************
 CD /d "%prog_dir%"
 echo Filtrer les extensions de la liste
-%pycommand% "%nut%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
+%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
 echo Tri de la liste par taille des fichiers
-%pycommand% "%nut%" -lib_call listmanager size_sorted_from_tfile -xarg "%prog_dir%zzlist.txt"
+%pycommand% "%squirrel%" -lib_call listmanager size_sorted_from_tfile -xarg "%prog_dir%zzlist.txt"
 echo Start compression by batches of "%workers%"
-%pycommand% "%nut%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%" --pararell "true"
+%pycommand% "%squirrel%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%" --pararell "true"
 
 ECHO ------------------------------------------------------------
 ECHO *********** TOUS LES FICHIERS ONT ÉTÉ TRAITÉS! *************
@@ -422,12 +430,12 @@ echo **************************
 echo Décompression d'un NSZ/XCZ
 echo **************************
 CD /d "%prog_dir%"
-%pycommand% "%nut%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsz xcz","token=False",Print="False"
+%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsz xcz","token=False",Print="False"
 for /f "tokens=*" %%f in (zzlist.txt) do (
 
-%pycommand% "%nut%" -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --decompress "auto"
+%pycommand% "%squirrel%" -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --decompress "auto"
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%zzlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%zzlist.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -478,17 +486,17 @@ echo          /_', "=. ';:;:;
 echo          @=:__,  \,;:;:'
 echo            _(\.=  ;:;;'
 echo           `"_(  _/="`
-echo            `"'		
+echo            `"'
 exit /B
 
 :program_logo
 
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -496,12 +504,11 @@ ECHO ---------------------------------------------------------------------------
 ECHO =============================     BY JULESONTHEROAD     =============================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
-ECHO "                    BASED IN THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                   VERSION %program_version% (NEW)
-ECHO -------------------------------------------------------------------------------------                   
+ECHO "                    BASED ON THE WORK OF BLAWAR AND LUCA FRAGA                     "
+ECHO                                    VERSION %program_version%
+ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B
@@ -527,5 +534,3 @@ exit /B
 
 :salida
 exit /B
-
-

@@ -1,6 +1,6 @@
 @ECHO OFF
 chcp 65001 >nul
-set "program_version=0.97"
+set "program_version=1.00B"
 
 :TOP_INIT
 CD /d "%prog_dir%"
@@ -41,7 +41,7 @@ set "showname=%orinput%"
 call :processing_message
 REM echo %safe_var%>safe.txt
 call :squirrell
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
 if "%zip_restore%" EQU "true" ( set "ziptarget=%%f" )
 if "%zip_restore%" EQU "true" ( call :makezip )
 call :getname
@@ -67,7 +67,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -87,7 +87,7 @@ call :getname
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
 echo Terminé.
 if "%vrename%" EQU "true" ( call :addtags_from_xci )
 if "%vrepack%" EQU "nsp" ( call "%nsp_lib%" "convert" "%w_folder%" )
@@ -100,7 +100,7 @@ move "%w_folder%\*.xci" "%fold_output%\!end_folder!" >NUL 2>&1
 move  "%w_folder%\*.xc*"  "%fold_output%\!end_folder!" >NUL 2>&1
 move "%w_folder%\*.nsp" "%fold_output%\!end_folder!" >NUL 2>&1
 move "%w_folder%\*.ns*" "%fold_output%\!end_folder!" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -131,7 +131,7 @@ set "showname=%orinput%"
 call :processing_message
 ::echo %safe_var%>safe.txt
 call :squirrell
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
 if "%zip_restore%" EQU "true" ( set "ziptarget=%%f" )
 if "%zip_restore%" EQU "true" ( call :makezip )
 )
@@ -141,7 +141,7 @@ for /r "%~1" %%f in (*.xci) do (
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%%f"
 echo Terminé.
 )
 if "%vrepack%" EQU "nsp" ( call "%nsp_lib%" "convert" "%w_folder%" )
@@ -159,7 +159,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -189,7 +189,7 @@ set "showname=%orinput%"
 call :processing_message
 if exist "%w_folder%" rmdir /s /q "%w_folder%" >NUL 2>&1
 call :squirrell
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%~1"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%~1"
 if "%zip_restore%" EQU "true" ( set "ziptarget=%~1" )
 if "%zip_restore%" EQU "true" ( call :makezip )
 call :getname
@@ -211,7 +211,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -230,7 +230,7 @@ call :getname
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%~1"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%~1"
 echo Terminé.
 if "%vrename%" EQU "true" call :addtags_from_xci
 if "%vrepack%" EQU "nsp" ( call "%nsp_lib%" "convert" "%w_folder%" )
@@ -244,7 +244,7 @@ move  "%w_folder%\*.xci"  "%fold_output%\!end_folder!" >NUL 2>&1
 move  "%w_folder%\*.xc*"  "%fold_output%\!end_folder!" >NUL 2>&1
 move  "%w_folder%\*.nsp"  "%fold_output%\!end_folder!" >NUL 2>&1
 move "%w_folder%\*.ns*" "%fold_output%\!end_folder!" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -271,7 +271,7 @@ call :program_logo
 echo ********************************
 echo Vous êtes entré en mode manuel
 echo ********************************
-if "%manual_intro%" EQU "indiv" ( goto normalmode ) 
+if "%manual_intro%" EQU "indiv" ( goto normalmode )
 if "%manual_intro%" EQU "multi" ( goto multimode )
 if "%manual_intro%" EQU "split" ( goto SPLMODE )
 if "%manual_intro%" EQU "update" ( goto UPDMODE )
@@ -290,7 +290,10 @@ echo Tapez "5" pour voir les informations  du fichier XCI ou NSP
 echo Tapez "6" pour entrer en mode construction de base de donnée
 echo Tapez "0" pour configurer le script
 echo.
-echo Tapez "N" pour aller au nouveau mode
+echo Tapez "N" pour accéder au MODE STANDARD
+echo Tapez "M" pour accéder au MODE MTP
+echo Tapez "D" pour accéder à GOOGLE DRIVE 
+echo Tapez "L" pour accéder à l'ancien mode
 echo .......................................................................
 echo.
 set /p bs="Faites votre choix: "
@@ -302,8 +305,18 @@ if /i "%bs%"=="4" goto UPDMODE
 if /i "%bs%"=="5" goto INFMODE
 if /i "%bs%"=="6" goto DBMODE
 if /i "%bs%"=="0" goto OPT_CONFIG
-if /i "%bs%"=="N" exit /B
+if /i "%bs%"=="N" goto call_new
+if /i "%bs%"=="D" goto GDMode
+if /i "%bs%"=="M" goto MTPMode
 goto manual_Reentry
+
+:MTPMode
+call "%prog_dir%ztools\MtpMode_fr.bat"
+exit /B
+
+:GDMode
+call "%prog_dir%ztools\DriveMode_fr.bat"
+exit /B
 
 REM //////////////////////////////////////////////////
 REM /////////////////////////////////////////////////
@@ -443,7 +456,7 @@ set string=
 :update_list1
 if !pos1! GTR !pos2! ( goto :update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :update_list1 
+goto :update_list1
 :update_list2
 set string=%string%,
 set skiplist=%string%
@@ -531,7 +544,7 @@ if /i "%bs%"=="0" set "patchRSV=-pv false"
 if /i "%bs%"=="1" set "patchRSV=-pv true"
 if /i "%patchRSV%"=="none" echo Choix inexistant.
 if /i "%patchRSV%"=="none" goto s_RSV_wrongchoice
-if /i "%bs%"=="0" goto s_KeyChange_skip 
+if /i "%bs%"=="0" goto s_KeyChange_skip
 
 :s_KeyChange_wrongchoice
 echo *******************************************************
@@ -599,12 +612,12 @@ for /f "tokens=*" %%f in (list.txt) do (
 set "name=%%~nf"
 set "filename=%%~nxf"
 set "orinput=%%f"
-set "ziptarget=%%f" 
+set "ziptarget=%%f"
 
 if "%vrepack%" EQU "zip" ( set "zip_restore=true" )
 if "%%~nxf"=="%%~nf.nsp" call :nsp_manual
 if "%%~nxf"=="%%~nf.xci" call :xci_manual
-%pycommand% "%nut%" --strip_lines "%prog_dir%list.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%list.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -635,7 +648,7 @@ call :squirrell
 
 if "%vrepack%" EQU "zip" ( goto nsp_just_zip )
 
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
 
 :nsp_just_zip
 if "%zip_restore%" EQU "true" ( call :makezip )
@@ -659,7 +672,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé.
@@ -684,7 +697,7 @@ call :getname
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
 echo Terminé.
 if "%vrename%" EQU "true" call :addtags_from_xci
 if "%vrepack%" EQU "nsp" ( call "%nsp_lib%" "convert" "%w_folder%" )
@@ -698,7 +711,7 @@ move  "%w_folder%\*.xci"  "%fold_output%\!end_folder!" >NUL 2>&1
 move  "%w_folder%\*.xc*"  "%fold_output%\!end_folder!" >NUL 2>&1
 move  "%w_folder%\*.nsp"  "%fold_output%\!end_folder!" >NUL 2>&1
 move "%w_folder%\*.ns*" "%fold_output%\!end_folder!" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé.
@@ -859,7 +872,7 @@ set string=
 :multi_update_list1
 if !pos1! GTR !pos2! ( goto :multi_update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :multi_update_list1 
+goto :multi_update_list1
 :multi_update_list2
 set string=%string%,
 set skiplist=%string%
@@ -944,7 +957,7 @@ if /i "%bs%"=="0" set "patchRSV=-pv false"
 if /i "%bs%"=="1" set "patchRSV=-pv true"
 if /i "%patchRSV%"=="none" echo Choix inexistant.
 if /i "%patchRSV%"=="none" goto m_RSV_wrongchoice
-if /i "%bs%"=="0" goto m_KeyChange_skip 
+if /i "%bs%"=="0" goto m_KeyChange_skip
 
 :m_KeyChange_wrongchoice
 echo *******************************************************
@@ -1025,7 +1038,7 @@ set "filename=%%~nxf"
 set "orinput=%%f"
 if "%%~nxf"=="%%~nf.nsp" call :multi_nsp_manual
 if "%%~nxf"=="%%~nf.xci" call :multi_xci_manual
-%pycommand% "%nut%" --strip_lines "%prog_dir%mlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%mlist.txt"
 call :multi_contador_NF
 )
 set "filename=%finalname%"
@@ -1048,7 +1061,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 ECHO ------------------------------------------------------------
@@ -1074,7 +1087,7 @@ goto m_exit_choice
 set "showname=%orinput%"
 call :processing_message
 call :squirrell
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
 if "%zip_restore%" EQU "true" ( set "ziptarget=%orinput%" )
 if "%zip_restore%" EQU "true" ( call :makezip )
 echo Terminé.
@@ -1094,7 +1107,7 @@ call :getname
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" %nf_cleaner% "%orinput%"
 echo Terminé.
 call :thumbup
 call :delay
@@ -1153,7 +1166,7 @@ del "%prog_dir%logo.txt"
 if not exist "%w_folder%" MD "%w_folder%" >NUL 2>&1
 if exist "%w_folder%\normal" RD /S /Q "%w_folder%\normal" >NUL 2>&1
 
-%pycommand% "%nut%" --nsptype "%custlogo%">"%w_folder%\nsptype.txt"
+%pycommand% "%squirrel%" --nsptype "%custlogo%">"%w_folder%\nsptype.txt"
 set /p nsptype=<"%w_folder%\nsptype.txt"
 del "%w_folder%\nsptype.txt"
 if "%nsptype%" EQU "DLC" echo.
@@ -1161,7 +1174,7 @@ if "%nsptype%" EQU "DLC" echo ---Le NSP n'a pas de CONTROL NCA---
 if "%nsptype%" EQU "DLC" echo.
 if "%nsptype%" EQU "DLC" ( goto multi_set_clogo )
 MD "%w_folder%\normal" >NUL 2>&1
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\normal" --NSP_copy_nca_control "%custlogo%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\normal" --NSP_copy_nca_control "%custlogo%"
 echo ................
 echo "Logo extrait."
 echo ................
@@ -1172,7 +1185,7 @@ goto multi_checkagain
 del "%prog_dir%logo.txt"
 if not exist "%w_folder%" MD "%w_folder%" >NUL 2>&1
 if exist "%w_folder%\normal" RD /S /Q "%w_folder%\normal" >NUL 2>&1
-%pycommand% "%nut%" --ncatype "%custlogo%">"%w_folder%\ncatype.txt"
+%pycommand% "%squirrel%" --ncatype "%custlogo%">"%w_folder%\ncatype.txt"
 set /p ncatype=<"%w_folder%\ncatype.txt"
 del "%w_folder%\ncatype.txt"
 if "%ncatype%" NEQ "Content.CONTROL" echo.
@@ -1323,7 +1336,7 @@ set string=
 :sp_update_list1
 if !pos1! GTR !pos2! ( goto :sp_update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :sp_update_list1 
+goto :sp_update_list1
 :sp_update_list2
 set string=%string%,
 set skiplist=%string%
@@ -1392,7 +1405,7 @@ set "end_folder=%%~nf"
 set "orinput=%%f"
 if "%%~nxf"=="%%~nf.nsp" call :split_content
 if "%%~nxf"=="%%~nf.xci" call :split_content
-%pycommand% "%nut%" --strip_lines "%prog_dir%splist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%splist.txt"
 setlocal enabledelayedexpansion
 if exist "%fold_output%\!end_folder!" RD /S /Q "%fold_output%\!end_folder!" >NUL 2>&1
 MD "%fold_output%\!end_folder!" >NUL 2>&1
@@ -1400,7 +1413,7 @@ move "%w_folder%\*.xci" "%fold_output%\!end_folder!\" >NUL 2>&1
 move "%w_folder%\*.xc*" "%fold_output%\!end_folder!\" >NUL 2>&1
 move "%w_folder%\*.nsp" "%fold_output%\!end_folder!\" >NUL 2>&1
 move "%w_folder%\*.ns*" "%fold_output%\!end_folder!\" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\!end_folder!\%filename%.nsp" )
 if exist "%w_folder%" RD /S /Q  "%w_folder%" >NUL 2>&1
 endlocal
 call :sp_contador_NF
@@ -1410,7 +1423,7 @@ ECHO *********** Tout les fichiers ont été traités! *************
 ECHO ------------------------------------------------------------
 :SPLIT_exit_choice
 if exist splist.txt del splist.txt
-if /i "%va_exit%"=="true" echo PROGRAM WILL CLOSE NOW
+if /i "%va_exit%"=="true" echo LE PROGRAMME FERMERA MAINTENANT
 if /i "%va_exit%"=="true" ( PING -n 2 127.0.0.1 >NUL 2>&1 )
 if /i "%va_exit%"=="true" goto salida
 echo.
@@ -1430,7 +1443,7 @@ if exist "%w_folder%" RD /S /Q  "%w_folder%" >NUL 2>&1
 MD "%w_folder%" >NUL 2>&1
 call :processing_message
 call :squirrell
-%pycommand% "%nut%" %buffer% -o "%w_folder%" --splitter "%orinput%" -pe "secure"
+%pycommand% "%squirrel%" %buffer% -o "%w_folder%" --splitter "%orinput%" -pe "secure"
 for /f "usebackq tokens=*" %%f in ("%w_folder%\dirlist.txt") do (
 setlocal enabledelayedexpansion
 rem echo "!sp_repack!"
@@ -1455,7 +1468,7 @@ if "!sp_repack!" EQU "xci" ( call "%xci_lib%" "sp_repack" "%w_folder%" "!tfolder
 if "!sp_repack!" EQU "both" ( call "%nsp_lib%" "sp_convert" "%w_folder%" "!tfolder!" "!fname!" )
 if "!sp_repack!" EQU "both" ( call "%xci_lib%" "sp_repack" "%w_folder%" "!tfolder!" "!fname!" )
 endlocal
-%pycommand% "%nut%" --strip_lines "%prog_dir%dirlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%dirlist.txt"
 )
 del "%w_folder%\dirlist.txt" >NUL 2>&1
 
@@ -1517,17 +1530,17 @@ set basefile=%bs:"=%
 if /i "%basefile%"=="0" goto manual_Reentry
 
 set "test=%basefile%"
-set "basecheck=false" 
+set "basecheck=false"
 set test=%test:.xci=%
 if "%test%" NEQ "%basefile%" ( set "basecheck=true" )
 set "test=%basefile%"
 set test=%test:.nsp=%
 if "%test%" NEQ "%basefile%" ( set "basecheck=true" )
 ::echo %basecheck%
-if "%basecheck%" EQU "false" ( 
-echo. 
+if "%basecheck%" EQU "false" (
+echo.
 echo ---Mauvais type de fichier. Veuillez réessayer---
-echo. 
+echo.
 )
 if "%basecheck%" EQU "false" ( goto upd_ADD_BASE)
 if not exist "UPDlist.txt" goto upd_ADD_UPD_FILES
@@ -1568,19 +1581,23 @@ echo .................................................
 :upd_ADD_UPD_FILES
 ECHO.
 ECHO ************************************************************************************************
-echo Tapez "1" pour ajouter un dossier à la liste
-echo Tapez "2" pour ajouter un fichier à la liste
+echo Tapez "1" pour ajouter un dossier à la liste via le sélecteur
+echo Tapez "2" pour ajouter un fichier à la liste via le sélecteur
+echo Tapez "3" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "4" pour sélectionner des fichiers via le navigateur de dossiers
 ECHO Veuillez indiquer les fichiers que vous souhaitez ajouter pour mettre à jour le contenu de base.
 ECHO ************************************************************************************************
 ECHO.
 echo Tapez "0" pour revenir à la sélection du mode.
 ECHO.
-%pycommand% "%nut%" -t nsp xci -tfile "%prog_dir%UPDlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci -tfile "%prog_dir%UPDlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 if /i "%eval%"=="0" goto manual_Reentry
-if /i "%eval%"=="1" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
+if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
 
 goto upd_checkagain
 
@@ -1592,9 +1609,11 @@ echo ...........................................................................
 echo "Glissez un autre fichier et appuyer sur entrer pour l'ajouter à la liste."
 echo.
 echo Tapez "1" pour commencer le traitement.
-echo Tapez "2" pour ajouter un autre dossier à la liste
-echo Tapez "3" pour ajouter un autre fichier à la liste
-echo Tapez "4" pour changer le contenu de base
+echo Tapez "2" pour ajouter un autre dossier à la liste via le sélecteur
+echo Tapez "3" pour ajouter un autre fichier à la liste via le sélecteur
+echo Tapez "4" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "5" pour sélectionner des fichiers via le navigateur de dossiers
+echo Tapez "6" pour changer le contenu de base
 echo Tapez "i" pour voir la liste des fichiers à traiter.
 echo Tapez "b" pour voir quel contenu de base est utilisé actuellement.
 echo Tapez "r" pour supprimer certains fichiers de la liste (en partant du bas).
@@ -1605,7 +1624,7 @@ ECHO *************************************************
 echo Ou tapez "0" pour revenir à la sélection du mode.
 ECHO *************************************************
 echo.
-%pycommand% "%nut%" -t nsp xci -tfile "%prog_dir%UPDlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci -tfile "%prog_dir%UPDlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
@@ -1614,9 +1633,11 @@ endlocal
 
 if /i "%eval%"=="0" goto manual_Reentry
 if /i "%eval%"=="1" goto upd_starts
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
-if /i "%eval%"=="4" goto upd_ADD_BASE
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="6" goto upd_ADD_BASE
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto upd_showlist
 if /i "%eval%"=="b" goto upd_showbase
@@ -1651,7 +1672,7 @@ set string=
 :upd_update_list1
 if !pos1! GTR !pos2! ( goto :upd_update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :upd_update_list1 
+goto :upd_update_list1
 :upd_update_list2
 set string=%string%,
 set skiplist=%string%
@@ -1758,7 +1779,7 @@ if /i "%bs%"=="0" set "patchRSV=-pv false"
 if /i "%bs%"=="1" set "patchRSV=-pv true"
 if /i "%patchRSV%"=="none" echo Choix inexistant.
 if /i "%patchRSV%"=="none" goto m_RSV_wrongchoice
-if /i "%bs%"=="0" goto upd_KeyChange_skip 
+if /i "%bs%"=="0" goto upd_KeyChange_skip
 
 :upd_KeyChange_wrongchoice
 echo *******************************************************
@@ -1825,7 +1846,7 @@ call :program_logo
 
 if exist "%w_folder%" RD /S /Q "%w_folder%" >NUL 2>&1
 MD "%w_folder%" >NUL 2>&1
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -cskip "%cskip%" --updbase "%basefile%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -cskip "%cskip%" --updbase "%basefile%"
 
 for %%i in ("%basefile%") do (
 set "filename=%%~ni"
@@ -1838,7 +1859,7 @@ set "filename=%%~nxf"
 set "orinput=%%f"
 if "%%~nxf"=="%%~nf.nsp" call :UPD_nsp_manual
 if "%%~nxf"=="%%~nf.xci" call :UPD_xci_manual
-%pycommand% "%nut%" --strip_lines "%prog_dir%UPDlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%UPDlist.txt"
 call :UPD_contador_NF
 )
 set "filename=%end_folder%[multi]"
@@ -1858,7 +1879,7 @@ move "%w_folder%\*.nsp" "%gefolder%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%gefolder%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%gefolder%\%filename%.nsp" )
 endlocal
 RD /S /Q "%w_folder%" >NUL 2>&1
 ECHO ------------------------------------------------------------
@@ -1883,7 +1904,7 @@ goto UPD_exit_choice
 set "showname=%orinput%"
 call :processing_message
 call :squirrell
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -tfile "%prog_dir%UPDlist.txt" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -tfile "%prog_dir%UPDlist.txt" %nf_cleaner% "%orinput%"
 if "%zip_restore%" EQU "true" ( set "ziptarget=%orinput%" )
 if "%zip_restore%" EQU "true" ( call :makezip )
 call :thumbup
@@ -1901,7 +1922,7 @@ call :getname
 echo -------------------------------------------
 echo Extraction de la partition secure du xci...
 echo -------------------------------------------
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -tfile "%prog_dir%UPDlist.txt" %nf_cleaner% "%orinput%"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\secure" -tfile "%prog_dir%UPDlist.txt" %nf_cleaner% "%orinput%"
 echo Terminé.
 call :thumbup
 call :delay
@@ -1996,12 +2017,12 @@ if not errorlevel 1 goto DBcheckfolder
 if exist "%bs%\" goto DBcheckfolder
 goto DBcheckfile
 :DBcheckfolder
-%pycommand% "%nut%" -t nsp -tfile "%prog_dir%DBL.txt" -ff "%targt%"
-%pycommand% "%nut%" -t nsx -tfile "%prog_dir%DBL.txt" -ff "%targt%"
+%pycommand% "%squirrel%" -t nsp -tfile "%prog_dir%DBL.txt" -ff "%targt%"
+%pycommand% "%squirrel%" -t nsx -tfile "%prog_dir%DBL.txt" -ff "%targt%"
 goto DBcheckagain
 :DBcheckfile
-%pycommand% "%nut%" -t nsp -tfile "%prog_dir%DBL.txt" -ff "%targt%"
-%pycommand% "%nut%" -t nsx -tfile "%prog_dir%DBL.txt" -ff "%targt%"
+%pycommand% "%squirrel%" -t nsp -tfile "%prog_dir%DBL.txt" -ff "%targt%"
+%pycommand% "%squirrel%" -t nsx -tfile "%prog_dir%DBL.txt" -ff "%targt%"
 goto DBcheckagain
 echo.
 :DBcheckagain
@@ -2051,7 +2072,7 @@ set string=
 :DBupdate_list1
 if !pos1! GTR !pos2! ( goto :DBupdate_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :DBupdate_list1 
+goto :DBupdate_list1
 :DBupdate_list2
 set string=%string%,
 set skiplist=%string%
@@ -2128,13 +2149,13 @@ for /f "tokens=*" %%f in (DBL.txt) do (
 set "name=%%~nf"
 set "filename=%%~nxf"
 set "orinput=%%f"
-set "ziptarget=%%f" 
+set "ziptarget=%%f"
 if "%vrepack%" EQU "zip" ( set "zip_restore=true" )
 if "%%~nxf"=="%%~nf.nsp" call :DBnsp_manual
 if "%%~nxf"=="%%~nf.nsx" call :DBnsp_manual
 if "%%~nxf"=="%%~nf.NSP" call :DBnsp_manual
 if "%%~nxf"=="%%~nf.NSX" call :DBnsp_manual
-%pycommand% "%nut%" --strip_lines "%prog_dir%DBL.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%DBL.txt"
 call :DBcontador_NF
 )
 ECHO ------------------------------------------------------------
@@ -2142,7 +2163,7 @@ ECHO *********** Tout les fichiers ont été traités! *************
 ECHO ------------------------------------------------------------
 :DBs_exit_choice
 if exist DBL.txt del DBL.txt
-if /i "%va_exit%"=="true" echo PROGRAM WILL CLOSE NOW
+if /i "%va_exit%"=="true" echo LE PROGRAMME FERMERA MAINTENANT
 if /i "%va_exit%"=="true" ( PING -n 2 127.0.0.1 >NUL 2>&1 )
 if /i "%va_exit%"=="true" goto salida
 echo.
@@ -2189,7 +2210,7 @@ set "orinput=%%f"
 set "db_file=%prog_dir%INFO\%dbformat%_DB.txt"
 set "dbdir=%prog_dir%INFO\"
 call :DBGeneration
-%pycommand% "%nut%" --strip_lines "%prog_dir%DBL.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%DBL.txt"
 call :DBcontador_NF
 )
 ECHO ------------------------------------------------------------
@@ -2199,7 +2220,7 @@ goto DBs_exit_choice
 
 :DBGeneration
 if not exist "%dbdir%" MD "%dbdir%">NUL 2>&1
-%pycommand% "%nut%" --dbformat "%dbformat%" -dbfile "%db_file%" -tfile "%prog_dir%DBL.txt" -nscdb "%orinput%" 
+%pycommand% "%squirrel%" --dbformat "%dbformat%" -dbfile "%db_file%" -tfile "%prog_dir%DBL.txt" -nscdb "%orinput%"
 exit /B
 
 :DBcontador_NF
@@ -2245,17 +2266,17 @@ echo          /_', "=. ';:;:;
 echo          @=:__,  \,;:;:'
 echo            _(\.=  ;:;;'
 echo           `"_(  _/="`
-echo            `"'		
+echo            `"'
 exit /B
 
 :program_logo
 
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -2263,12 +2284,11 @@ ECHO ---------------------------------------------------------------------------
 ECHO =============================     BY JULESONTHEROAD     =============================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
-ECHO "                    BASED IN THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                  VERSION %program_version% (LEGACY)
-ECHO -------------------------------------------------------------------------------------                   
+ECHO "                    BASED ON THE WORK OF BLAWAR AND LUCA FRAGA                     "
+ECHO                                  VERSION 1.00 (LEGACY)
+ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B
@@ -2323,25 +2343,25 @@ exit /B
 echo.
 echo Création d'un fichier zip pour %ziptarget%...
 echo.
-%pycommand% "%nut%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\zip" --zip_combo "%ziptarget%"
-%pycommand% "%nut%" -o "%w_folder%\zip" --NSP_c_KeyBlock "%ziptarget%"
-%pycommand% "%nut%" --nsptitleid "%ziptarget%" >"%w_folder%\nsptitleid.txt"
+%pycommand% "%squirrel%" %buffer% %patchRSV% %vkey% %capRSV% -o "%w_folder%\zip" --zip_combo "%ziptarget%"
+%pycommand% "%squirrel%" -o "%w_folder%\zip" --NSP_c_KeyBlock "%ziptarget%"
+%pycommand% "%squirrel%" --nsptitleid "%ziptarget%" >"%w_folder%\nsptitleid.txt"
 if exist "%w_folder%\secure\*.dat" ( move "%w_folder%\secure\*.dat" "%w_folder%\zip" ) >NUL 2>&1
 
 set /p titleid=<"%w_folder%\nsptitleid.txt"
 del "%w_folder%\nsptitleid.txt" >NUL 2>&1
-%pycommand% "%nut%" --nsptype "%ziptarget%" >"%w_folder%\nsptype.txt"
+%pycommand% "%squirrel%" --nsptype "%ziptarget%" >"%w_folder%\nsptype.txt"
 set /p type=<"%w_folder%\nsptype.txt"
 del "%w_folder%\nsptype.txt" >NUL 2>&1
-%pycommand% "%nut%" --ReadversionID "%ziptarget%">"%w_folder%\nspversion.txt"
+%pycommand% "%squirrel%" --ReadversionID "%ziptarget%">"%w_folder%\nspversion.txt"
 set /p verID=<"%w_folder%\nspversion.txt"
 set "verID=V%verID%"
 del "%w_folder%\nspversion.txt" >NUL 2>&1
 if "%type%" EQU "BASE" ( set "ctag=" )
 if "%type%" EQU "UPDATE" ( set ctag=[UPD] )
 if "%type%" EQU "DLC" ( set ctag=[DLC] )
-%pycommand% "%nut%" -i "%ziptarget%">"%w_folder%\zip\fileinfo[%titleid%][%verID%]%ctag%.txt" 
-%pycommand% "%nut%" --filelist "%ziptarget%">"%w_folder%\zip\ORIGINAL_filelist[%titleid%][%verID%]%ctag%.txt"
+%pycommand% "%squirrel%" -i "%ziptarget%">"%w_folder%\zip\fileinfo[%titleid%][%verID%]%ctag%.txt"
+%pycommand% "%squirrel%" --filelist "%ziptarget%">"%w_folder%\zip\ORIGINAL_filelist[%titleid%][%verID%]%ctag%.txt"
 "%zip%" -ifo "%w_folder%\zip" -zippy "%w_folder%\%titleid%[%verID%]%ctag%.zip"
 RD /S /Q "%w_folder%\zip" >NUL 2>&1
 exit /B
@@ -2352,7 +2372,7 @@ echo.
 exit /B
 
 :check_titlerights
-%pycommand% "%nut%" --nsp_htrights "%target%">"%w_folder%\trights.txt"
+%pycommand% "%squirrel%" --nsp_htrights "%target%">"%w_folder%\trights.txt"
 set /p trights=<"%w_folder%\trights.txt"
 del "%w_folder%\trights.txt" >NUL 2>&1
 if "%trights%" EQU "TRUE" ( goto ct_true )
@@ -2363,10 +2383,10 @@ exit /B
 
 
 :addtags_from_nsp
-%pycommand% "%nut%" --nsptitleid "%orinput%" >"%w_folder%\nsptitleid.txt"
+%pycommand% "%squirrel%" --nsptitleid "%orinput%" >"%w_folder%\nsptitleid.txt"
 set /p titleid=<"%w_folder%\nsptitleid.txt"
 del "%w_folder%\nsptitleid.txt" >NUL 2>&1
-%pycommand% "%nut%" --nsptype "%orinput%" >"%w_folder%\nsptype.txt"
+%pycommand% "%squirrel%" --nsptype "%orinput%" >"%w_folder%\nsptype.txt"
 set /p type=<"%w_folder%\nsptype.txt"
 del "%w_folder%\nsptype.txt" >NUL 2>&1
 if "%type%" EQU "BASE" ( set filename=%filename%[%titleid%][v0] )
@@ -2377,9 +2397,9 @@ exit /B
 :addtags_from_xci
 dir "%w_folder%\secure\*.cnmt.nca" /b  >"%w_folder%\ncameta.txt"
 set /p ncameta=<"%w_folder%\ncameta.txt"
-del "%w_folder%\ncameta.txt" >NUL 2>&1 
+del "%w_folder%\ncameta.txt" >NUL 2>&1
 set "ncameta=%w_folder%\secure\%ncameta%"
-%pycommand% "%nut%" --ncatitleid "%ncameta%" >"%w_folder%\ncaid.txt"
+%pycommand% "%squirrel%" --ncatitleid "%ncameta%" >"%w_folder%\ncaid.txt"
 set /p titleid=<"%w_folder%\ncaid.txt"
 del "%w_folder%\ncaid.txt"
 echo [%titleid%]>"%w_folder%\titleid.txt"
@@ -2395,14 +2415,15 @@ set ttag=[DLC]
 
 if [%titleid%] EQU %c_base% set ttag=[v0]
 if [%titleid%] EQU %c_update% set ttag=[UPD]
- 
-set filename=%filename%[%titleid%][%ttag%] 
+
+set filename=%filename%[%titleid%][%ttag%]
 del "%w_folder%\titleid.txt"
+exit /B
+
+:call_new
+call "%prog_dir%\NSCB_fr.bat"
 exit /B
 
 :salida
 ::pause
 exit
-
-
-

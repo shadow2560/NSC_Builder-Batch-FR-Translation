@@ -12,7 +12,9 @@ echo Tapez "2" pour les OPTIONS globales et manuelles.
 echo Tapez "3" pour vérifier le fichier KEYS.TXT 
 echo tapez "4" pour la mise à jour de NUTDB
 echo Tapez "5" pour les options de l'interface
-echo Tapez "6" pour les options de GOOGLE DRIVE
+echo Tapez "6" pour les options du serveur
+echo Tapez "7" pour les options de GOOGLE DRIVE
+echo Tapez "8" pour les options  MTP
 echo.
 echo Tapez "c" pour voir le profile actuel
 echo Tapez "d" pour remettre les paramètres par défaut
@@ -25,7 +27,9 @@ if /i "%bs%"=="2" goto sc3
 if /i "%bs%"=="3" goto verify_keys
 if /i "%bs%"=="4" goto update_nutdb
 if /i "%bs%"=="5" goto interface
-if /i "%bs%"=="6" goto google_drive
+if /i "%bs%"=="6" goto server
+if /i "%bs%"=="7" goto google_drive
+if /i "%bs%"=="8" goto MTP
 
 if /i "%bs%"=="c" call :curr_set1
 if /i "%bs%"=="c" call :curr_set2
@@ -57,7 +61,7 @@ echo Tapez "c" pour connaître les paramètres du mode automatique
 echo Tapez "d" pour régler les paramètres par défaut du mode automatique
 echo Tapez "0" pour revenir au menu de configuration
 echo Tapez "e" pour revenir au menu principal du script
-echo .......................................................
+echo .............................................................................
 echo.
 set /p bs="Faites votre choix: "
 if /i "%bs%"=="1" goto op_repack
@@ -157,7 +161,7 @@ if "%v_fold%"=="none" goto op_pfolder
 
 set v_fold="fi_rep=%v_fold%"
 set v_fold="%v_fold%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "61" -nl "set %v_fold%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "61" -nl "set %v_fold%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "61" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -198,7 +202,7 @@ if "%v_RSV%"=="none" goto op_RSV
 
 set v_RSV="patchRSV=%v_RSV%"
 set v_RSV="%v_RSV%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "41" -nl "set %v_RSV%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "41" -nl "set %v_RSV%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "41" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -275,8 +279,8 @@ set v_KGEN="vkey=%v_KGEN%"
 set v_KGEN="%v_KGEN%"
 set v_CAPRSV="capRSV=%v_CAPRSV%"
 set v_CAPRSV="%v_CAPRSV%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "95" -nl "set %v_KGEN%" 
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "42" -nl "set %v_CAPRSV%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "95" -nl "set %v_KGEN%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "42" -nl "set %v_CAPRSV%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "95" -nl "La ligne de configuration a été modifiée en: "
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "42" -nl "La ligne de configuration a été modifiée en: "
@@ -354,7 +358,7 @@ echo ********************************************************
 echo configuration des couleurs
 echo ********************************************************
 echo --------------------------------------------------------
-echo Couleur du texte
+echo COULEUR DE PREMIER PLAN (Couleur du texte)
 echo --------------------------------------------------------
 echo Tapez "1" pour changer la couleur du texte en blanc clair (défaut)
 echo Tapez "2" pour changer la couleur du texte en noir
@@ -494,7 +498,7 @@ if /i "%bs%"=="e" goto salida
 set v_wf="w_folder=%v_wf%"
 set v_wf="%v_wf%"
 
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "8" -nl "set %v_wf%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "8" -nl "set %v_wf%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "8" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -525,7 +529,7 @@ if /i "%bs%"=="e" goto salida
 set v_of="fold_output=%v_of%"
 set v_of="%v_of%"
 
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "10" -nl "set %v_of%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "10" -nl "set %v_of%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "10" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -575,11 +579,11 @@ set v_delta="%v_delta%"
 set v_delta2_="skdelta=%v_delta2_%"
 set v_delta2_="%v_delta2_%"
 
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "36" -nl "set %v_delta%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "36" -nl "set %v_delta%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "36" -nl "La ligne de configuration a été modifiée en: "
 echo.
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "37" -nl "set %v_delta2_%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "37" -nl "set %v_delta2_%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "37" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -618,7 +622,7 @@ if "%v_gzip%"=="none" goto op_zip
 
 set v_gzip="zip_restore=%v_gzip%"
 set v_gzip="%v_gzip%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "78" -nl "set %v_gzip%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "78" -nl "set %v_gzip%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "78" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -657,7 +661,7 @@ if "%v_exit%"=="none" goto op_aexit
 
 set v_exit="va_exit=%v_exit%"
 set v_exit="%v_exit%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "101" -nl "set %v_exit%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "101" -nl "set %v_exit%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "101" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -694,7 +698,7 @@ if "%skipRSVprompt%"=="none" goto op_kgprompt
 
 set skipRSVprompt="skipRSVprompt=%skipRSVprompt%"
 set skipRSVprompt="%skipRSVprompt%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "108" -nl "set %skipRSVprompt%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "108" -nl "set %skipRSVprompt%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "108" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -750,7 +754,7 @@ if "%v_buffer%"=="none" goto op_buffer
 
 set v_buffer="buffer=%v_buffer%"
 set v_buffer="%v_buffer%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "32" -nl "set %v_buffer%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "32" -nl "set %v_buffer%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "32" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -770,7 +774,7 @@ echo.
 echo Tapez "1" pour utiliser le format exfat (option par défaut)
 echo Tapez "2" pour utiliser le format FAT32 spécifique à SX OS (fichiers xc0 et ns0)
 echo Tapez "3" pour utiliser le format FAT32 fat32 pour tous les CFWs (répertoire archivé)
-
+echo.
 echo Remarque: l'option de dossier d'archivage exporte les fichiers NSP sous forme de dossiers et de fichiers xci. 
 echo fichiers fractionnés.
 echo.
@@ -802,13 +806,13 @@ if "%v_fat2%"=="none" goto op_fat
 
 set v_fat1="fatype=%v_fat1%"
 set v_fat1="%v_fat1%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "116" -nl "set %v_fat1%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "116" -nl "set %v_fat1%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "116" -nl "La ligne de configuration a été modifiée en: "
 echo.
 set v_fat2="fexport=%v_fat2%"
 set v_fat2="%v_fat2%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "117" -nl "set %v_fat2%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "117" -nl "set %v_fat2%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "117" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -845,7 +849,7 @@ if "%v_oforg%"=="none" goto op_oforg
 
 set v_oforg="oforg=%v_oforg%"
 set v_oforg="%v_oforg%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "125" -nl "set %v_oforg%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "125" -nl "set %v_oforg%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "125" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -882,7 +886,7 @@ if "%v_nscbmode%"=="none" goto op_nscbmode
 
 set v_nscbmode="NSBMODE=%v_nscbmode%"
 set v_nscbmode="%v_nscbmode%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "132" -nl "set %v_nscbmode%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "132" -nl "set %v_nscbmode%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "132" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -919,7 +923,7 @@ if "%v_roma%"=="none" goto op_romanize
 
 set v_roma="romaji=%v_roma%"
 set v_roma="%v_roma%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "139" -nl "set %v_roma%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "139" -nl "set %v_roma%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "139" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -958,7 +962,7 @@ if "%v_trans%"=="none" goto op_translate
 
 set v_trans="transnutdb=%v_trans%"
 set v_trans="%v_trans%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "147" -nl "set %v_trans%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "147" -nl "set %v_trans%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "147" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -1017,7 +1021,7 @@ if "%v_workers%"=="none" goto op_threads
 
 set v_workers="workers=%v_workers%"
 set v_workers="%v_workers%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "153" -nl "set %v_workers%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "153" -nl "set %v_workers%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "153" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -1057,7 +1061,7 @@ set v_nszlevels="%v_nszlevels%"
 if "%v_nszlevels%"=="none" echo Mauvais choix
 if "%v_nszlevels%"=="none" echo.
 if "%v_nszlevels%"=="none" goto op_NSZ1
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "158" -nl "set %v_nszlevels%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "158" -nl "set %v_nszlevels%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "158" -nl "La ligne de configuration a été modifiée en: "
 :op_NSZ2
@@ -1091,7 +1095,7 @@ set v_nszthreads="%v_nszthreads%"
 if "%v_nszthreads%"=="none" echo Mauvais choix
 if "%v_nszthreads%"=="none" echo.
 if "%v_nszthreads%"=="none" goto op_NSZ2
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "159" -nl "set %v_nszthreads%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "159" -nl "set %v_nszthreads%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "159" -nl "La ligne de configuration a été modifiée en: "
 pause
@@ -1132,7 +1136,7 @@ set v_xcz_export="%v_xcz_export%"
 if "%v_xcz_export%"=="none" echo Mauvais choix
 if "%v_xcz_export%"=="none" echo.
 if "%v_xcz_export%"=="none" goto op_NSZ3
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "160" -nl "set %v_xcz_export%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "160" -nl "set %v_xcz_export%"
 echo.
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "160" -nl "La ligne de configuration a été modifiée en: "
 pause
@@ -1166,7 +1170,7 @@ REM vkey
 set "v_KGEN=-kp false"
 set v_KGEN="vkey=%v_KGEN%"
 set v_KGEN="%v_KGEN%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "95" -nl "set %v_KGEN%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "95" -nl "set %v_KGEN%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "95" -nl "La ligne de configuration a été modifiée en: "
 
 exit /B
@@ -1188,56 +1192,56 @@ REM w_folder
 set "v_wf=NSCB_temp"
 set v_wf="w_folder=%v_wf%"
 set v_wf="%v_wf%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "8" -nl "set %v_wf%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "8" -nl "set %v_wf%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "8" -nl "La ligne de configuration a été modifiée en: "
 
 REM v_of
 set "v_of=NSCB_output"
 set v_of="fold_output=%v_of%"
 set v_of="%v_of%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "10" -nl "set %v_of%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "10" -nl "set %v_of%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "10" -nl "La ligne de configuration a été modifiée en: "
 
 REM v_delta
 set "v_delta=--C_clean_ND"
 set v_delta="nf_cleaner=%v_delta%"
 set v_delta="%v_delta%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "36" -nl "set %v_delta%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "36" -nl "set %v_delta%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "36" -nl "La ligne de configuration a été modifiée en: "
 
 REM v_delta2
 set "v_delta2_=-ND true"
 set v_delta2_="skdelta=%v_delta2_%"
 set v_delta2_="%v_delta2_%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "37" -nl "set %v_delta2_%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "37" -nl "set %v_delta2_%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "37" -nl "La ligne de configuration a été modifiée en: "
 
 REM zip_restore
 set "v_gzip=false"
 set v_gzip="zip_restore=%v_gzip%"
 set v_gzip="%v_gzip%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "78" -nl "set %v_gzip%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "78" -nl "set %v_gzip%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "78" -nl "La ligne de configuration a été modifiée en: "
 
 REM AUTO-EXIT
 set "v_exit=false"
 set v_exit="va_exit=%v_exit%"
 set v_exit="%v_exit%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "101" -nl "set %v_exit%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "101" -nl "set %v_exit%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "101" -nl "La ligne de configuration a été modifiée en: "
 
 REM skipRSVprompt
 set "skipRSVprompt=false"
 set skipRSVprompt="skipRSVprompt=%skipRSVprompt%"
 set skipRSVprompt="%skipRSVprompt%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "108" -nl "set %skipRSVprompt%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "108" -nl "set %skipRSVprompt%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "108" -nl "La ligne de configuration a été modifiée en: "
 
 REM buffer
 set "v_buffer=-b 65536"
 set v_buffer="buffer=%v_buffer%"
 set v_buffer="%v_buffer%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "32" -nl "set %v_buffer%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "32" -nl "set %v_buffer%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "32" -nl "La ligne de configuration a été modifiée en: "
 
 
@@ -1245,61 +1249,61 @@ REM FAT format
 set "v_fat1=-fat exfat"
 set v_fat1="fatype=%v_fat1%"
 set v_fat1="%v_fat1%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "116" -nl "set %v_fat1%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "116" -nl "set %v_fat1%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "116" -nl "La ligne de configuration a été modifiée en: "
 
 set "v_fat2=-fx files"
 set v_fat2="fexport=%v_fat2%"
 set v_fat2="%v_fat2%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "117" -nl "set %v_fat2%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "117" -nl "set %v_fat2%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "117" -nl "La ligne de configuration a été modifiée en: "
 
 REM OUTPUT ORGANIZING format
 set "v_oforg=inline"
 set v_oforg="oforg=%v_oforg%"
 set v_oforg="%v_oforg%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "125" -nl "set %v_oforg%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "125" -nl "set %v_oforg%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "125" -nl "La ligne de configuration a été modifiée en: "
 
 REM NSCB MODE
 set "v_nscbmode=new"
 set v_nscbmode="NSBMODE=%v_nscbmode%"
 set v_nscbmode="%v_nscbmode%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "132" -nl "set %v_nscbmode%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "132" -nl "set %v_nscbmode%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "132" -nl "La ligne de configuration a été modifiée en: "
 
 REM ROMAJI
 set "v_roma=TRUE"
 set v_roma="romaji=%v_roma%"
 set v_roma="%v_roma%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "139" -nl "set %v_roma%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "139" -nl "set %v_roma%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "139" -nl "La ligne de configuration a été modifiée en: "
 
 REM TRANSLATE
 set "v_trans=FALSE"
 set v_trans="transnutdb=%v_trans%"
 set v_trans="%v_trans%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "147" -nl "set %v_trans%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "147" -nl "set %v_trans%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "147" -nl "La ligne de configuration a été modifiée en: "
 
 REM WORKERS
 set v_workers="workers=-threads 1"
 set v_workers="%v_workers%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "153" -nl "set %v_workers%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "153" -nl "set %v_workers%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "153" -nl "La ligne de configuration a été modifiée en: "
 
 REM COMPRESSION
 set "v_nszlevels=17"
 set v_nszlevels="compression_lv=%v_nszlevels%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "158" -nl "set %v_nszlevels%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "158" -nl "set %v_nszlevels%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "158" -nl "La ligne de configuration a été modifiée en: "
 set "v_nszlevels=0"
 set v_nszlevels="compression_threads=%v_nszlevels%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "159" -nl "set %v_nszlevels%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "159" -nl "set %v_nszlevels%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "159" -nl "La ligne de configuration a été modifiée en: "
 set "v_xcz_export=xcz"
 set v_xcz_export="xci_export=%v_xcz_export%"
-%pycommand% "%listmanager%" -cl "%op_file%" -ln "160" -nl "set %v_xcz_export%" 
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "160" -nl "set %v_xcz_export%"
 %pycommand% "%listmanager%" -rl "%op_file%" -ln "160" -nl "La ligne de configuration a été modifiée en: "
 
 exit /B
@@ -1383,7 +1387,7 @@ echo ***************************************************************************
 echo Vérifiez les clés dans KEYS.TXT CONTRE SHA256 hashes a partir des clés correct
 echo ******************************************************************************
 
-%pycommand% "%nut%" -nint_keys "%dec_keys%"
+%pycommand% "%squirrel%" -nint_keys "%dec_keys%"
 
 echo ...........................................................................
 echo Tapez "0" pour revenir au menu de configuration
@@ -1406,7 +1410,7 @@ echo ***************************************************************************
 echo Forcer la mise à jour de NUT_DB 
 echo ***************************************************************************
 
-%pycommand% "%nut%" -lib_call nutdb force_refresh
+%pycommand% "%squirrel%" -lib_call nutdb force_refresh
 
 echo ...........................................................................
 echo Tapez "0" pour revenir au menu de configuration
@@ -1423,20 +1427,23 @@ if /i "%bs%"=="e" goto salida
 cls
 call :logo
 echo ********************************************************
-echo Configuration de GOOGLE-DRIVE 
+echo GOOGLE-DRIVE - CONFIGURATION
 echo ********************************************************
-echo Tappez "1" pour enregistrer le compte
+echo Tapez "1" pour enregistrer le compte
+echo Tapez "2" pour actualiser le cache des bibliothèques distantes
 echo.
-echo Tappez "0" pour revenir au menu de configuration
-echo Tappez "e" pour revenir au PROGRAMME PRINCIPAL
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "e" pour revenir au programme principal
 echo .......................................................
 echo.
 set /p bs="Faites votre choix: "
 if /i "%bs%"=="1" goto op_google_drive_account
+if /i "%bs%"=="2" ( %pycommand% "%squirrel%" -lib_call workers concurrent_cache )
+if /i "%bs%"=="2" goto google_drive
 
 if /i "%bs%"=="0" goto sc1
 if /i "%bs%"=="e" goto salida
-echo MAUVAIS CHOIX
+echo Mauvais choix
 echo.
 goto google_drive
 
@@ -1446,22 +1453,22 @@ call :logo
 echo ***************************************************************************
 echo Enregistrer un compte Google Drive
 echo ***************************************************************************
-echo Vous avez besoin d'un credentials.json, cela peut être appelé credentials.json ou nom 
-echo du jeton que vous générerez.json. Un credentials.json peut être utilisé avec de nombreux comptes
-echo pour générer des jetons, mais s'il est utilisé avec un compte différent de celui qui est
-echo généré, vous obtiendrez un avertissement.
-echo Un système est implémenté pour avoir de nombreuses informations credentials json dans le dossier d'informations d'identification
+echo Vous avez besoin d'un credentials.json, cela peut être appelé credentials.json ou nom de
+echo jeton que vous générez generate.json. Un credentials.json peut être utilisé avec de nombreux comptes
+echo pour générer des jetons, mais s'il est utilisé avec un compte différent de celui qui
+echo est généré, vous obtiendrez un avertissement.
+echo Un système est implémenté pour avoir de nombreuses informations d'identification json dans le dossier des informations d'identification
 echo lire le document distribué avec NSCB pour savoir comment obtenir le fichier.
 echo.
-echo Remarque. Le nom que vous saisissez à cette étape sera utilisé pour enregistrer le jeton et pour
-echo le chemin.
+echo Note. Le nom que vous saisissez à cette étape sera utilisé pour enregistrer le jeton 
+echo et pour le chemins.
 echo.
 echo Example: Un jeton nommé "drive" utilisera des chemins comme drive:/folder/file.nsp
 echo.
-set /p bs="Entrez le nom du lecteur: "
+set /p bs="Tapez le nom du lecteur: "
 set "token=%bs%"
 echo.
-%pycommand% "%nut%" -lib_call Drive.Private create_token -xarg "%token%" headless="False"
+%pycommand% "%squirrel%" -lib_call Drive.Private create_token -xarg "%token%" headless="False"
 pause
 goto google_drive
 
@@ -1471,24 +1478,30 @@ call :logo
 echo ********************************************************
 echo INTERFACE - CONFIGURATION
 echo ********************************************************
-echo Tapez "1" pour changer la configuration de la VISIBILITÉ DE DÉMARRAGE
-echo Tapez "2" pour choisir un NAVIGATEUR pour l'interface
+echo Input "1" pour modifier la configuration de VISIBILITÉ DE DÉMARRAGE
+echo Tapez "2" pour choisir un NAVIGATEUR pour l'interface 
 echo Tapez "3" pour désactiver la LECTURE VIDÉO
+echo Tapez "4" pour configurer PORT
+echo Tapez "5" pour configurer HOST
+echo Tapez "6" pour configurer le paramètre NOCONSOLE
 echo.
-echo Tapez "d" pour restaurer les option par defauts de l'interface
-echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "d" pour restaurer les parametres par defauts de l'interface
+echo Tapez "0" pour revenir au MENU de CONFIGURATION
 echo Tapez "e" pour revenir au programme principal
 echo .......................................................
 echo.
-set /p bs="Faites votre choix: "
+set /p bs="Enter your choice: "
 if /i "%bs%"=="1" goto op_interface_consolevisibility
 if /i "%bs%"=="2" goto op_interface_browser
 if /i "%bs%"=="3" goto op_interface_video_playback
+if /i "%bs%"=="4" goto op_interface_port
+if /i "%bs%"=="5" goto op_interface_host
+if /i "%bs%"=="6" goto op_interface_noconsole
 
 if /i "%bs%"=="d" goto op_interface_defaults
 if /i "%bs%"=="0" goto sc1
 if /i "%bs%"=="e" goto salida
-echo mauvais choix
+echo Mauvais choix
 echo.
 goto interface
 
@@ -1525,7 +1538,7 @@ if "%v_interface%"=="none" goto op_interface_consolevisibility
 
 set v_interface="start_minimized=%v_interface%"
 set v_interface="%v_interface%"
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "16" -nl "set %v_interface%" 
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "17" -nl "set %v_interface%"
 echo.
 %pycommand% "%listmanager%" -rl "%opt_interface%" -ln "14" -nl "La ligne de configuration a été modifiée en: "
 echo.
@@ -1535,32 +1548,32 @@ goto interface
 :op_interface_browser
 cls
 call :logo
-echo *******************************************************************************************
+echo ***************************************************************************
 echo CHOISISSEZ LE NAVIGATEUR POUR L'INTERFACE DE DÉMARRAGE
-echo *******************************************************************************************
+echo ***************************************************************************
 echo Sélectionne le navigateur utilisé pour démarrer l'interface:
 echo Options:
-echo 1. Auto. L'ordre est défini dans la base de ztools \ chrome ou du navigateur installé dans 
-echo le système. Ceci est réglé automatiquement par squirrel dans l'ordre suivant:
+echo 1. Auto. L'ordre est défini dans la base de ztools\chromium ou du navigateur installé dans 
+echo système. Ceci est réglé automatiquement par squirrel dans l'ordre suivant:
 echo    I.   ztools\chromium (Chromium portable\Slimjet portable)
 echo    II.  Chrome ou Chromium installé sur le système
 echo    III. Microsoft Edge (Non recommandé)
-echo 2. Sytem Default. Utilise le navigateur par défaut (faible compatibilité)
+echo 2. Sytem Default. Utilise le système par défaut (faible compatibilité)
 echo 3. Définissez un chemin brut vers un navigateur par l'une des méthodes suivantes.
 echo    I.   Chemin absolu vers votre navigateur, se terminant par .exe
 echo    II.  Chemin absolu vers un fichier .lnk (raccourci Windows)
 echo    III. Nom d'un fichier .lnk dans ztools \ chromium (se terminant par .lnk)
 echo         Example: brave.lnk 
-echo         Cela lira ztools \ chrome \ brave.lnk et redirigera vers l'exe 
-echo         
+echo         This will read ztools\chromium\brave.lnk and redirect to the exe 
+echo         path launching brave browser
 echo.
-echo Tapez "1" ou "d" pour régler la variable sur AUTO
-echo Tapez "2" pour définir la variable sur SYSTEM DEFAULT
-echo Tapez le nom shortcut.lnk dans les mèthodes 3.III
-echo Tapez le chemin absolu vers le navigateur ou un raccourci pour la méthode 3.I ou 3.II
+echo Tapez "1" or "d" pour régler la variable sur AUTO
+echo Tapez "2" pour définir la variable sur SYSTEME DEFAUT
+echo Entrez le nom shortcut.lnk dans les méthodes 3.III
+echo Entrez un itinéraire absolu vers le navigateur ou un raccourci pour la méthode 3.I ou 3.II
 echo.
 echo Tapez "0" pour revenir au menu de configuration
-echo Tapez "b" pour revenir au menu de l'interface
+echo Tapez "b" pour revenir au menu de l'inteface
 echo Tapez "e" pour revenir au programme principal
 echo.
 set /p bs="Faites votre choix: "
@@ -1576,9 +1589,9 @@ if /i "%bs%"=="e" goto salida
 set v_interface_browser="browserpath=%v_interface_browser%"
 set v_interface_browser="%v_interface_browser%"
 
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "30" -nl "set %v_interface_browser%" 
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "31" -nl "set %v_interface_browser%"
 echo.
-%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "30" -nl "La ligne de configuration a été remplacée par: "
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "31" -nl "La ligne de configuration a été remplacée par: "
 echo.
 pause
 goto interface
@@ -1590,10 +1603,10 @@ echo ***************************************************************************
 echo DÉSACTIVER LA LECTURE VIDÉO
 echo ***************************************************************************
 echo Désactive le lecteur HLS pour les vidéos Nintendo.com.
-echo Ceci est destiné aux anciens ordinateurs qui peuvent geler avec le javascript HLS
+echo Ceci est destiné aux anciens ordinateurs qui peuvent se bloquer avec le lecteur javascript HLS 
 echo 
 echo.
-echo Tapez "1"  pour ACTIVER la lecture vidéo
+echo Tapez "1"  pour activer la lecture vidéo
 echo Tapez "2"  pour désactiver la lecture vidéo
 echo Tapez "D"  par défaut (NON MINIMISÉ)
 echo.
@@ -1611,15 +1624,130 @@ if /i "%bs%"=="0" goto sc1
 if /i "%bs%"=="b" goto interface
 if /i "%bs%"=="e" goto salida
 
-if "%v_video_playback%"=="none" echo mauvais choix
+if "%v_video_playback%"=="none" echo Mauvais choix
 if "%v_video_playback%"=="none" echo.
 if "%v_video_playback%"=="none" goto op_interface_video_playback
 
 set v_video_playback="videoplayback=%v_video_playback%"
 set v_video_playback="%v_video_playback%"
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "34" -nl "set %v_video_playback%" 
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "35" -nl "set %v_video_playback%"
 echo.
-%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "34" -nl "La ligne de configuration a été remplacée par: "
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "35" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto interface
+
+:op_interface_port
+cls
+call :logo
+echo ***************************************************************************
+echo CHOISIR UN PORT POUR L'INTERFACE
+echo ***************************************************************************
+echo. 
+echo Note "rg8000" localise un port ouvert entre 8000 et 8999, il permet d'ouvrir
+echo plusieurs fenêtres d'interface en même temps. Ceci est le paramètre par défaut
+echo.
+echo Tapez "1" or "d" pour définir la variable sur rg8000
+echo ou saisir un NUMÉRO DE PORT
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au menu de l'interface
+echo Tapez "e" pour revenir au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_interface_port=%bs%"
+if /i "%bs%"=="1" set "v_interface_port=rg8000"
+if /i "%bs%"=="d" set "v_interface_port=rg8000"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto interface
+if /i "%bs%"=="e" goto salida
+
+set v_interface_port="port=%v_interface_port%"
+set v_interface_port="%v_interface_port%"
+
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "48" -nl "set %v_interface_port%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "48" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto interface
+
+:op_interface_host
+cls
+call :logo
+echo ***************************************************************************
+echo CHOISIR LE PORT POUR L'INTERFACE
+echo ***************************************************************************
+echo Localhost. L'interface n'est visible que localement (par défaut)
+echo 0.0.0.0. l'interface peut être visible sur le même réseau
+echo.
+echo Tapez "1" ou "D" pour configurer l'hôte localement (Localhost)
+echo Tapez "2" pour configurer l'hôte sur le reseau (0.0.0.0) 
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au menu de l'interface
+echo Tapez "e" pour revenir au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_interface_host=none"
+if /i "%bs%"=="1" set "v_interface_host=localhost"
+if /i "%bs%"=="2" set "v_interface_host=0.0.0.0"
+if /i "%bs%"=="d" set "v_interface_host=localhost"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto interface
+if /i "%bs%"=="e" goto salida
+
+if "%v_interface_host%"=="none" echo Mauvais choix
+if "%v_interface_host%"=="none" echo.
+if "%v_interface_host%"=="none" goto op_interface_host
+
+set v_interface_host="host=%v_interface_host%"
+set v_interface_host="%v_interface_host%"
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "55" -nl "set %v_interface_host%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "55" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto interface
+
+:op_interface_noconsole
+cls
+call :logo
+echo ***************************************************************************
+echo CONSOLE CACHÉE POUR L'INTERFACE
+echo ***************************************************************************
+echo NoConsole=désactivé: Maque les commandes et redirige les impressions de la console vers l'interface
+echo c'est le paramètre par défaut.
+echo NoConsole=Activé: Affiche les commandes
+echo.
+echo Tapez "1" ou "D" pour configurer NOCONSOLE sur désactivé
+echo Tapez "2" pour configurer NOCONSOLE sur activé
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au menu de l'interface
+echo Tapez "e" pour revenir au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_interface_noconsole=none"
+if /i "%bs%"=="1" set "v_interface_noconsole=true"
+if /i "%bs%"=="2" set "v_interface_noconsole=false"
+if /i "%bs%"=="d" set "v_interface_noconsole=true"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto interface
+if /i "%bs%"=="e" goto salida
+
+if "%v_interface_noconsole%"=="none" echo Mauvais choix
+if "%v_interface_noconsole%"=="none" echo.
+if "%v_interface_noconsole%"=="none" goto op_interface_noconsole
+
+set v_interface_noconsole="noconsole=%v_interface_noconsole%"
+set v_interface_noconsole="%v_interface_noconsole%"
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "61" -nl "set %v_interface_noconsole%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "61" -nl "La ligne de configuration a été remplacée par: "
 echo.
 pause
 goto interface
@@ -1630,34 +1758,993 @@ call :logo
 ::Startup
 set v_interface="start_minimized=no"
 set v_interface="%v_interface%"
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "16" -nl "set %v_interface%" 
-%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "16" -nl "La ligne de configuration a été remplacée par: "
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "17" -nl "set %v_interface%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "17" -nl "La ligne de configuration a été remplacée par: "
 echo.
 ::Browserpath
 set v_interface_browser="browserpath=auto"
 set v_interface_browser="%v_interface_browser%"
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "30" -nl "set %v_interface_browser%" 
-%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "30" -nl "La ligne de configuration a été remplacée par: "
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "31" -nl "set %v_interface_browser%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "31" -nl "La ligne de configuration a été remplacée par: "
 echo.
 ::Video playback
 set v_video_playback="videoplayback=true"
 set v_video_playback="%v_video_playback%"
-%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "34" -nl "set %v_video_playback%" 
-%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "34" -nl "La ligne de configuration a été remplacée par: "
-pause
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "35" -nl "set %v_video_playback%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "35" -nl "La ligne de configuration a été remplacée par: "
+::Port
+set v_interface_port="port=rg8000"
+set v_interface_port="%v_interface_port%"
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "48" -nl "set %v_interface_port%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "48" -nl "La ligne de configuration a été remplacée par: "
+::Host
+set v_interface_host="host=localhost"
+set v_interface_host="%v_interface_host%"
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "55" -nl "set %v_interface_host%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "55" -nl "La ligne de configuration a été remplacée par: "
 
+::NoConsole
+set v_interface_noconsole="noconsole=true"
+set v_interface_noconsole="%v_interface_noconsole%"
+%pycommand% "%listmanager%" -cl "%opt_interface%" -ln "61" -nl "set %v_interface_noconsole%"
+%pycommand% "%listmanager%" -rl "%opt_interface%" -ln "61" -nl "La ligne de configuration a été remplacée par: "
+pause
+goto sc1
+
+:server
+cls
+call :logo
+echo ********************************************************
+echo SERVEUR - CONFIGURATION
+echo ********************************************************
+echo Tapez "1" pour changer la configuration de la VISIBILITÉ DE DÉMARRAGE
+echo Tapez "2" pour désactiver la LECTURE VIDÉO
+echo Tapez "3" pour configurer le numéro de port
+echo Tapez "4" pour configurer l'hôte
+echo Tapez "5" pour configurer le paramètre noconsole
+echo Tapez "6" pour configurer le paramètre ssl
+echo.
+echo Tapez "d" pour restaurer les parametres du serveur par defauts
+echo Tapez "0" pour revenir au menu de configuration 
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo .......................................................
+echo.
+set /p bs="Faites votre choix: "
+if /i "%bs%"=="1" goto op_server_consolevisibility
+if /i "%bs%"=="2" goto op_server_video_playback
+if /i "%bs%"=="3" goto op_server_port
+if /i "%bs%"=="4" goto op_server_host
+if /i "%bs%"=="5" goto op_server_noconsole
+if /i "%bs%"=="6" goto op_server_ssl
+
+if /i "%bs%"=="d" goto op_server_defaults
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="e" goto salida
+echo mauvaix choix
+echo.
+goto server
+
+:op_server_consolevisibility
+cls
+call :logo
+echo ***************************************************************************
+echo Lancement du fichier SERVER.BAT en mode minimiser?
+echo ***************************************************************************
+echo Contrôle si la console de débogage démarre minimisée avec le Web
+echo interface
+echo.
+echo Tapez "1" pour démarrer MINIMISÉ
+echo Tapez "2" pour NE PAS démarrer MINIMISÉ
+echo Tapez "D" par défaut (NON MINIMISÉ)
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_server_vis=none"
+if /i "%bs%"=="1" set "v_server_vis=yes"
+if /i "%bs%"=="2" set "v_server_vis=no"
+if /i "%bs%"=="d" set "v_server_vis=no"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+if "%v_server_vis%"=="none" echo Mauvais choix
+if "%v_server_vis%"=="none" echo.
+if "%v_server_vis%"=="none" goto op_server_consolevisibility
+
+set v_server_vis="start_minimized=%v_server_vis%"
+set v_server_vis="%v_server_vis%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "17" -nl "set %v_server_vis%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "17" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_video_playback
+cls
+call :logo
+echo ***************************************************************************
+echo DÉSACTIVER LA LECTURE VIDÉO
+echo ***************************************************************************
+echo Désactive le lecteur HLS pour les vidéos Nintendo.com.
+echo Ceci est destiné aux anciens ordinateurs qui peuvent se bloquer avec le javascript HLS 
+echo 
+echo.
+echo Tapez "1"  pour activer la lecture vidéo
+echo Tapez "2"  pour désactiver la lecture vidéo
+echo Tapez "D"  par défaut (NON MINIMISÉ)
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_video_playback=none"
+if /i "%bs%"=="1" set "v_video_playback=true"
+if /i "%bs%"=="2" set "v_video_playback=false"
+if /i "%bs%"=="d" set "v_video_playback=false"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+if "%v_video_playback%"=="none" echo Mauvais choix
+if "%v_video_playback%"=="none" echo.
+if "%v_video_playback%"=="none" goto op_server_video_playback
+
+set v_video_playback="videoplayback=%v_video_playback%"
+set v_video_playback="%v_video_playback%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "21" -nl "set %v_video_playback%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "21" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_port
+cls
+call :logo
+echo ***************************************************************************
+echo CHOISIR LE PORT POUR LE SERVEUR
+echo ***************************************************************************
+echo. 
+echo Remarque "rg8000" localise un port ouvert entre 8000 et 8999, il permet d'ouvrir
+echo plusieurs fenêtres d'interface en même temps. Ceci est le paramètre par défaut
+echo.
+echo Tapez "1" ou "d" pour définir la variable sur rg8000
+echo ou saisissez un NUMÉRO DE PORT
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_server_port=%bs%"
+if /i "%bs%"=="1" set "v_server_port=rg8000"
+if /i "%bs%"=="d" set "v_server_port=rg8000"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+set v_server_port="port=%v_server_port%"
+set v_server_port="%v_server_port%"
+
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "29" -nl "set %v_server_port%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "29" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_host
+cls
+call :logo
+echo ***************************************************************************
+echo CHOISIR UN PORT POUR L'INTERFACE
+echo ***************************************************************************
+echo Localhost. Le serveur n'est visible que localement (par défaut)
+echo 0.0.0.0. L'interface peut être visible sur le même réseau
+echo.
+echo Tapez "1" ou "D" pour configurer l'hôte comme LOCALHOST 
+echo Tapez "2" pour configurer l'hôte en tant que 0.0.0.0 
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_server_host=none"
+if /i "%bs%"=="1" set "v_server_host=localhost"
+if /i "%bs%"=="2" set "v_server_host=0.0.0.0"
+if /i "%bs%"=="d" set "v_server_host=localhost"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+if "%v_server_host%"=="none" echo Mouvais choix
+if "%v_server_host%"=="none" echo.
+if "%v_server_host%"=="none" goto op_server_host
+
+set v_server_host="host=%v_server_host%"
+set v_server_host="%v_server_host%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "36" -nl "set %v_server_host%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "36" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_noconsole
+cls
+call :logo
+echo ***************************************************************************
+echo CONSOLE CACHÉE POUR SERVEUR
+echo ***************************************************************************
+echo NoConsole=Activé. Masque la console cmd et redirige les impressions de la console vers le serveur
+echo c'est le paramètre par défaut.
+echo NoConsole=Déactivé. Affiche la console cmd
+echo.
+echo Tapez "1" ou "D" configurer NOCONSOLE sur activé
+echo Tapez "2" pour configurer NOCONSOLE sur désactivé
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_server_noconsole=none"
+if /i "%bs%"=="1" set "v_server_noconsole=true"
+if /i "%bs%"=="2" set "v_server_noconsole=false"
+if /i "%bs%"=="d" set "v_server_noconsole=true"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+if "%v_server_noconsole%"=="none" echo Mauvais choix
+if "%v_server_noconsole%"=="none" echo.
+if "%v_server_noconsole%"=="none" goto op_server_noconsole
+
+set v_server_noconsole="noconsole=%v_server_noconsole%"
+set v_server_noconsole="%v_server_noconsole%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "42" -nl "set %v_server_noconsole%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "42" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_ssl
+cls
+call :logo
+echo ***************************************************************************
+echo PROTOCOLE SSL
+echo ***************************************************************************
+echo Si la valeur est activé, le serveur sera servi via https: s'il y a un
+echo fichier certificate.pem et key.pem dans zconfig. Si ces fichiers ne sont pas trouvés
+echo squirrel se repliera sur http: 
+echo.
+echo Tapez "1" ou "D" pour désactivé SSL (par défaut)
+echo Tapez "2" pour configurer SSL sur activé
+echo.
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "b" pour revenir au MENU SERVEUR
+echo Tapez "e" pour revenir au PROGRAMME PRINCIPAL
+echo.
+set /p bs="Faites votre choix: "
+set "v_server_SSL=none"
+if /i "%bs%"=="1" set "v_server_SSL=false"
+if /i "%bs%"=="2" set "v_server_SSL=true"
+if /i "%bs%"=="d" set "v_server_SSL=false"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto server
+if /i "%bs%"=="e" goto salida
+
+if "%v_server_SSL%"=="none" echo Mauvais choix
+if "%v_server_SSL%"=="none" echo.
+if "%v_server_SSL%"=="none" goto op_server_ssl
+
+set v_server_SSL="ssl=%v_server_SSL%"
+set v_server_SSL="%v_server_SSL%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "48" -nl "set %v_server_SSL%"
+echo.
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "48" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto server
+
+:op_server_defaults
+cls
+call :logo
+::Startup
+set v_interface="start_minimized=no"
+set v_interface="%v_interface%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "17" -nl "set %v_interface%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "17" -nl "La ligne de configuration a été remplacée par: "
+echo.
+::Video playback
+set v_video_playback="videoplayback=true"
+set v_video_playback="%v_video_playback%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "21" -nl "set %v_video_playback%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "21" -nl "La ligne de configuration a été remplacée par: "
+::Port
+set v_interface_port="port=rg8000"
+set v_interface_port="%v_interface_port%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "29" -nl "set %v_interface_port%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "29" -nl "La ligne de configuration a été remplacée par: "
+::Host
+set v_interface_host="host=localhost"
+set v_interface_host="%v_interface_host%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "36" -nl "set %v_interface_host%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "36" -nl "La ligne de configuration a été remplacée par: "
+::NoConsole
+set v_interface_noconsole="noconsole=true"
+set v_interface_noconsole="%v_interface_noconsole%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "42" -nl "set %v_interface_noconsole%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "42" -nl "La ligne de configuration a été remplacée par: "
+::SSL
+set v_server_SSL="ssl=false"
+set v_server_SSL="%v_server_SSL%"
+%pycommand% "%listmanager%" -cl "%opt_server%" -ln "48" -nl "set %v_server_SSL%"
+%pycommand% "%listmanager%" -rl "%opt_server%" -ln "48" -nl "La ligne de configuration a été remplacée par: "
+
+pause
+goto sc1
+
+:MTP
+cls
+call :logo
+echo ********************************************************
+echo MTP - CONFIGURATION
+echo ********************************************************
+echo Tapez "1" pour configurer la pré-installation de VERIFICATION
+echo Tapez "2" pour prioriser NSZ lors de la mise à jour automatique de l'appareil
+echo Tapez "3" pour activer les INSTALLATIONS CRYPTO STANDARD
+echo Tapez "4" pour EXCLURE XCI lors de l'installation des mises à jour dans AUTOUPDATE
+echo Tapez "5" pour basculer entre SD et EMMC en fonction de l'espace libre
+echo Tapez "6" pour vérifier le firmware sur la console avant de faire les installations
+echo Tapez "7" pour patcher la génération de clés des fichiers si nécessaire
+echo Tapez "8" pour vérifier si le contenu de base est installé avant l'installation
+echo Tapez "9" pour vérifier si d'anciennes mises à jour ou dlcs sont installés avant l'installation
+echo Tapez "10" pour choisir la configuration du dossier lors du dumping des sauvegardes
+echo Tapez "11" pour choisir si ajouter 'titleid' et la 'version' pour enregistrer les dumps
+echo Tapez "12" pour choisir comment ajouter des fichiers au cache distant pour les liens publics
+echo Tapez "13" pour modifier les FICHIERS PATCHÉS ET LES SPÉCIFICATIONS D'INSTALLATION XCI
+echo.
+echo Tapez "d" pour restaurer les paramètres par défaut MTP
+echo Tapez "0" pour revenir au menu de configuration
+echo Tapez "e" pour revenir au programme principal
+echo .......................................................
+echo.
+set /p bs="Faites votres choix: "
+if /i "%bs%"=="1" goto op_MTP_verification
+if /i "%bs%"=="2" goto op_MTP_prioritize_NSZ
+if /i "%bs%"=="3" goto op_MTP_standard_crypto
+if /i "%bs%"=="4" goto op_MTP_exclude_xci_autinst
+if /i "%bs%"=="5" goto op_MTP_aut_ch_medium
+if /i "%bs%"=="6" goto op_MTP_chk_fw
+if /i "%bs%"=="7" goto op_MTP_prepatch_kg
+if /i "%bs%"=="8" goto op_MTP_prechk_Base
+if /i "%bs%"=="9" goto op_MTP_prechk_Upd
+if /i "%bs%"=="10" goto op_MTP_saves_Inline
+if /i "%bs%"=="11" goto op_MTP_saves_AddTIDandVer
+if /i "%bs%"=="12" goto op_MTP_pdrive_truecopy
+if /i "%bs%"=="13" goto op_MTP_ptch_install_spec
+
+if /i "%bs%"=="d" goto op_mtp_defaults
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="e" goto salida
+echo Mauvais choix
+echo.
+goto MTP
+
+:op_MTP_verification
+cls
+call :logo
+echo ***************************************************************************
+echo ACTIVER LA VÉRIFICATION DE FICHIER PRÉ-INSTALLATION
+echo ***************************************************************************
+echo False: Vérification désactivée
+echo Vérification niveau 2: Nca sont lisibles, aucun fichier ne manque, la clé de titre est 
+echo correcte et la signature 1 est d'origine VÉRIFIABLE légitime. (défaut)
+echo Hash: Vérification au niveau 2  + Vérification du Hash
+echo.
+echo Tapez "1" ou "D" pour configurer la vérification au niveau 2
+echo Tapez "2" pour configurer la vérification du Hash
+echo Tapez "3" pour DÉSACTIVER LA VÉRIFICATION
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_mtp_verification=none"
+if /i "%bs%"=="1" set "v_mtp_verification=True"
+if /i "%bs%"=="2" set "v_mtp_verification=Hash"
+if /i "%bs%"=="3" set "v_mtp_verification=False"
+if /i "%bs%"=="d" set "v_mtp_verification=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_mtp_verification%"=="none" echo Mauvais choix
+if "%v_mtp_verification%"=="none" echo.
+if "%v_mtp_verification%"=="none" goto op_MTP_verification
+
+set v_mtp_verification="MTP_verification=%v_mtp_verification%"
+set v_mtp_verification="%v_mtp_verification%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "166" -nl "set %v_mtp_verification%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "166" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_prioritize_NSZ
+cls
+call :logo
+echo ************************************************************************************************
+echo PRIORISER NSZ SUR NSP LORS DE LA RECHERCHE DE NOUVELLES MISES À JOUR ET DLC DANS LA BIBLIOTHÈQUE
+echo ************************************************************************************************
+echo.
+echo Tapez "1" ou "D" pour prioriser NSZ
+echo Tapez "2" pour ne pas prioriser NSZ
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_prioritize_NSZ=none"
+if /i "%bs%"=="1" set "v_MTP_prioritize_NSZ=True"
+if /i "%bs%"=="3" set "v_MTP_prioritize_NSZ=False"
+if /i "%bs%"=="d" set "v_MTP_prioritize_NSZ=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_prioritize_NSZ%"=="none" echo Mauvais choix
+if "%v_MTP_prioritize_NSZ%"=="none" echo.
+if "%v_MTP_prioritize_NSZ%"=="none" goto op_MTP_prioritize_NSZ
+
+set v_MTP_prioritize_NSZ="MTP_prioritize_NSZ=%v_MTP_prioritize_NSZ%"
+set v_MTP_prioritize_NSZ="%v_MTP_prioritize_NSZ%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "167" -nl "set %v_MTP_prioritize_NSZ%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "167" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_exclude_xci_autinst
+cls
+call :logo
+echo ***************************************************************************
+echo Exclure les XCI des contrôles de mise à jour de nouveaux contenus
+echo ***************************************************************************
+echo.
+echo Tapez "1" ou "D" pour exclure les xci des contrôles
+echo Tapez "2" pour ne pas exclure les xci des contrôles
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_exclude_xci_autinst=none"
+if /i "%bs%"=="1" set "v_MTP_exclude_xci_autinst=True"
+if /i "%bs%"=="2" set "v_MTP_exclude_xci_autinst=False"
+if /i "%bs%"=="d" set "v_MTP_exclude_xci_autinst=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_exclude_xci_autinst%"=="none" echo Mauvais choix
+if "%v_MTP_exclude_xci_autinst%"=="none" echo.
+if "%v_MTP_exclude_xci_autinst%"=="none" goto op_MTP_exclude_xci_autinst
+
+set v_MTP_exclude_xci_autinst="MTP_exclude_xci_autinst=%v_MTP_exclude_xci_autinst%"
+set v_MTP_exclude_xci_autinst="%v_MTP_exclude_xci_autinst%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "168" -nl "set %v_MTP_exclude_xci_autinst%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "168" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_aut_ch_medium
+cls
+call :logo
+echo ***************************************************************************
+echo MODIFICATION AUTOMATIQUE DU SUPPORT SELON L'ESPACE SUR LE DISPOSITIF
+echo ***************************************************************************
+echo Si 'activé' change entre SD et EMMC lorsque l'espace est faible dans le
+echo support sélectionné. Si 'désactive' saute l'installation. 
+echo.
+echo Tapez "1" ou "D" pour changer de support en fonction de l'espace sur l'appariel
+echo Input "2" pour NE PAS changer de support en fonction de l'espace sur l'appariel
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_aut_ch_medium=none"
+if /i "%bs%"=="1" set "v_MTP_aut_ch_medium=True"
+if /i "%bs%"=="2" set "v_MTP_aut_ch_medium=False"
+if /i "%bs%"=="d" set "v_MTP_aut_ch_medium=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_aut_ch_medium%"=="none" echo Mauvais choix
+if "%v_MTP_aut_ch_medium%"=="none" echo.
+if "%v_MTP_aut_ch_medium%"=="none" goto op_MTP_aut_ch_medium
+
+set v_MTP_aut_ch_medium="MTP_aut_ch_medium=%v_MTP_aut_ch_medium%"
+set v_MTP_aut_ch_medium="%v_MTP_aut_ch_medium%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "169" -nl "set %v_MTP_aut_ch_medium%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "169" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_chk_fw
+cls
+call :logo
+echo ***************************************************************************
+echo VÉRIFIEZ LE FIRMWARE SUR LA CONSOLE ET SUR LE FICHIER EN TRAITEMENT
+echo ***************************************************************************
+echo.
+echo Tapez "1" ou "D" pour NE PAS vérifier le FIRMWARE (par défaut)
+echo Tapez "2" pour vérifier le FIRMWARE 
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_chk_fw=none"
+if /i "%bs%"=="1" set "v_MTP_chk_fw=False"
+if /i "%bs%"=="2" set "v_MTP_chk_fw=True"
+if /i "%bs%"=="d" set "v_MTP_chk_fw=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_chk_fw%"=="none" echo Mauvais choix
+if "%v_MTP_chk_fw%"=="none" echo.
+if "%v_MTP_chk_fw%"=="none" goto op_MTP_chk_fw
+
+set v_MTP_chk_fw="MTP_chk_fw=%v_MTP_chk_fw%"
+set v_MTP_chk_fw="%v_MTP_chk_fw%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "170" -nl "set %v_MTP_chk_fw%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "170" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_prepatch_kg
+cls
+call :logo
+echo ***************************************************************************
+echo Vérifier le FIRMWARE sur la console et sur le fichier en traitement
+echo ***************************************************************************
+echo Après une vérification du firmware sur la console et le programme de fichiers hte décidera
+echo s'il doit patcher ou ignorer le fichier basé sur cette option
+echo Note: Actuellement, il est nécessaire de générer un nouveau fichier avant de l'envoyer via MTP
+echo car la possibilité de patcher des flux à la volée n'est pas encore implémentée sur
+echo le crochet mtp.
+echo.
+echo Tapez "1" ou "D" pour NE PAS PATCHER LES FICHIERS (par défaut)
+echo Input "2" pour PATCHER LES FICHIERS
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_prepatch_kg=none"
+if /i "%bs%"=="1" set "v_MTP_prepatch_kg=False"
+if /i "%bs%"=="2" set "v_MTP_prepatch_kg=True"
+if /i "%bs%"=="d" set "v_MTP_prepatch_kg=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_prepatch_kg%"=="none" echo Mauvais choix
+if "%v_MTP_prepatch_kg%"=="none" echo.
+if "%v_MTP_prepatch_kg%"=="none" goto op_MTP_prepatch_kg
+
+set v_MTP_prepatch_kg="MTP_chk_fw=%v_MTP_prepatch_kg%"
+set v_MTP_prepatch_kg="%v_MTP_prepatch_kg%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "171" -nl "set %v_MTP_prepatch_kg%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "171" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_prechk_Base
+cls
+call :logo
+echo ***************************************************************************
+echo VÉRIFIEZ SI LES BASEGAMES SONT DÉJÀ INSTALLÉS DANS LA CONSOLE
+echo ***************************************************************************
+echo Si activé, si un jeu de base est dans la console, l'installation sera ignorée
+echo Si elle est désactivée, l'installation sera écrasée.
+echo.
+echo Tapez "1" ou "D" pour VÉRIFIER ET SAUTER LES JEUX DÉJÀ INSTALLÉS (par défaut)
+echo Input "2" pour NE PAS vérifier et ignorer les jeux déjà installés
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_prechk_Base=none"
+if /i "%bs%"=="1" set "v_MTP_prechk_Base=True"
+if /i "%bs%"=="2" set "v_MTP_prechk_Base=False"
+if /i "%bs%"=="d" set "v_MTP_prechk_Base=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_prechk_Base%"=="none" echo Mauvais choix
+if "%v_MTP_prechk_Base%"=="none" echo.
+if "%v_MTP_prechk_Base%"=="none" goto op_MTP_prechk_Base
+
+set v_MTP_prechk_Base="MTP_prechk_Base=%v_MTP_prechk_Base%"
+set v_MTP_prechk_Base="%v_MTP_prechk_Base%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "173" -nl "set %v_MTP_prechk_Base%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "173" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_prechk_Upd
+cls
+call :logo
+echo ***************************************************************************
+echo VÉRIFIEZ SI LES MISES À JOUR ET SONT DÉJÀ INSTALLÉES DANS LA CONSOLE
+echo ***************************************************************************
+echo Si activé, vérifie si une mise à jour ou un dlc est déjà dans la console si 
+echo la version est inférieure à celle envoyé, elle supprime l'ancienne pré-installation
+echo pour récupérer de l'espace avant le processus d'installation, si la version dans la
+echo console est égal ou supérieur, l'installation est ignorée.
+echo Si elle est désactivée, elle permet d'installer des mises à jour ou dlc ainsi que d'écraser
+echo les mises à jour avec le même numéro de version.
+echo.
+echo Tapez "1" ou "D" pour NE PAS VÉRIFIER ET SAUTER les mises à jour ou dlc déjà installé (par défaut)
+echo Input "2" pour vérifier et sauter les mises à jour ou dlc déjà installé
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votres choix: "
+set "v_MTP_prechk_Upd=none"
+if /i "%bs%"=="1" set "v_MTP_prechk_Upd=False"
+if /i "%bs%"=="2" set "v_MTP_prechk_Upd=True"
+if /i "%bs%"=="d" set "v_MTP_prechk_Upd=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_prechk_Upd%"=="none" echo Mauvais choix
+if "%v_MTP_prechk_Upd%"=="none" echo.
+if "%v_MTP_prechk_Upd%"=="none" goto op_MTP_prechk_Upd
+
+set v_MTP_prechk_Upd="MTP_prechk_Upd=%v_MTP_prechk_Upd%"
+set v_MTP_prechk_Upd="%v_MTP_prechk_Upd%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "174" -nl "set %v_MTP_prechk_Upd%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "174" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_saves_Inline
+cls
+call :logo
+echo ***************************************************************************
+echo STOCKE LES DUMPS DE SAUVEGARDE DANS DES DOSSIERS OU EN LIGNE
+echo ***************************************************************************
+echo.
+echo Tapez "1" ou "D" pour stocker les sauvegardes dans des dossiers (par défaut)
+echo Tapez "2" pour stocker les sauvegardes en ligne
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_saves_Inline=none"
+if /i "%bs%"=="1" set "v_MTP_saves_Inline=False"
+if /i "%bs%"=="2" set "v_MTP_saves_Inline=True"
+if /i "%bs%"=="d" set "v_MTP_saves_Inline=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_saves_Inline%"=="none" echo Mauvais choix
+if "%v_MTP_saves_Inline%"=="none" echo.
+if "%v_MTP_saves_Inline%"=="none" goto op_MTP_saves_Inline
+
+set v_MTP_saves_Inline="MTP_saves_Inline=%v_MTP_saves_Inline%"
+set v_MTP_saves_Inline="%v_MTP_saves_Inline%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "176" -nl "set %v_MTP_saves_Inline%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "176" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_saves_AddTIDandVer
+cls
+call :logo
+echo ***************************************************************************
+echo AJOUTER DES ÉTIQUETTES DE TITRE ET DE VERSION AUX SAVEGARDES
+echo ***************************************************************************
+echo Ceci est destiné à connaître la version du jeu sur la console lorsque la sauvegarde a été effectuée
+echo pour éviter les problèmes de compatibilité.
+echo.
+echo Tapez "1" ou "D" AJOUTER les balises 'titleid' et 'version' au fichier (par défaut)
+echo Tapez "2" pour NE PAS AJOUTER les balises 'titleid' et 'version' au fichier (par défaut)
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_saves_AddTIDandVer=none"
+if /i "%bs%"=="1" set "v_MTP_saves_AddTIDandVer=False"
+if /i "%bs%"=="2" set "v_MTP_saves_AddTIDandVer=True"
+if /i "%bs%"=="d" set "v_MTP_saves_AddTIDandVer=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_saves_AddTIDandVer%"=="none" echo Mauvais choix
+if "%v_MTP_saves_AddTIDandVer%"=="none" echo.
+if "%v_MTP_saves_AddTIDandVer%"=="none" goto op_MTP_saves_AddTIDandVer
+
+set v_MTP_saves_AddTIDandVer="MTP_saves_AddTIDandVer=%v_MTP_saves_AddTIDandVer%"
+set v_MTP_saves_AddTIDandVer="%v_MTP_saves_AddTIDandVer%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "177" -nl "set %v_MTP_saves_AddTIDandVer%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "177" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_pdrive_truecopy
+cls
+call :logo
+echo ***************************************************************************
+echo AJOUTER DES ÉTIQUETTES DE TITRE ET DE VERSION AUX SAVEGARDES
+echo ***************************************************************************
+echo Lors de l'installation ou du transfert d'un jeu à partir d'un lien public Google Drive NSCB
+echo nécessite une configuration d'authentification par jeton et de dossier de cache dans un compte Google Drive pour
+echo une meilleure compatibilité.
+echo.
+echo Le jeu est copié en devenant propriétaire du dossier cache, ce qui évite également
+echo problèmes de quota si TRUECOPY est activé.
+echo Si TRUECOPY est désactivé, le jeu est ajouté au dossier de cache en tant que lien symbolique, 
+echo cela permet au fichier d'être appelé avec le jeton d'authentification mais peut présenter un quota
+echo problèmes si le lien a été partagé.
+echo.
+echo Tapez "1" ou "D" pour activer TRUECOPY (par défaut)
+echo Tapez "2" pour ne pas activer TRUECOPY (par défaut)
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_op_MTP_pdrive_truecopy=none"
+if /i "%bs%"=="1" set "v_op_MTP_pdrive_truecopy=True"
+if /i "%bs%"=="2" set "v_op_MTP_pdrive_truecopy=False"
+if /i "%bs%"=="d" set "v_op_MTP_pdrive_truecopy=True"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_op_MTP_pdrive_truecopy%"=="none" echo Mauvais choix
+if "%v_op_MTP_pdrive_truecopy%"=="none" echo.
+if "%v_op_MTP_pdrive_truecopy%"=="none" goto op_MTP_pdrive_truecopy
+
+set v_op_MTP_pdrive_truecopy="MTP_pdrive_truecopy=%v_op_MTP_pdrive_truecopy%"
+set v_op_MTP_pdrive_truecopy="%v_op_MTP_pdrive_truecopy%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "179" -nl "set %v_op_MTP_pdrive_truecopy%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "179" -nl "La ligne de configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_standard_crypto
+cls
+call :logo
+echo ***************************************************************************
+echo INSTALLER TOUS LES FICHIERS NSP COMME CRYPTO STANDARD
+echo ***************************************************************************
+echo Cela signifie que les fichiers nsp sont installés sans tickets ni titres, ce
+echo pour garder le ticketblob dans la console propre.
+echo.
+echo Tapez "1" ou "D" pour INSTALLER AVEC TITLERIGHTS (par défaut)
+echo Tapez "2" pour INSTALLER EN TANT QUE CRYPTO STANDARD
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_standard_crypto=none"
+if /i "%bs%"=="1" set "v_MTP_standard_crypto=False"
+if /i "%bs%"=="2" set "v_MTP_standard_crypto=True"
+if /i "%bs%"=="d" set "v_MTP_standard_crypto=False"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_standard_crypto%"=="none" echo Mauvais choix
+if "%v_MTP_standard_crypto%"=="none" echo.
+if "%v_MTP_standard_crypto%"=="none" goto op_MTP_standard_crypto
+
+set v_MTP_standard_crypto="MTP_stc_installs=%v_MTP_standard_crypto%"
+set v_MTP_standard_crypto="%v_MTP_standard_crypto%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "181" -nl "set %v_MTP_standard_crypto%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "181" -nl "La ligne dans la configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_MTP_ptch_install_spec
+cls
+call :logo
+echo ***************************************************************************
+echo PÉCIFICATION POUR L'INSTALLATION DE NSP ET XCI PATCHÉS
+echo ***************************************************************************
+echo Legacy crée le fichier corrigé ou le fichier converti, puis le transfère vers la
+echo console.
+echo Spec1 crée un patch pour patcher le flux à la volée. Spec1 traite les multifiles
+echo comme différents fichiers déclenchant plusieurs installations consécutives.
+echo.
+echo Tapez "1" ou "D" pour utiliser SPÉCIFICATION Nº 1 (par défaut)
+echo Tapez "2" pour utiliser la spécification LEGACY
+echo.
+echo Tapez "0" pour retourner au menu de configuration
+echo Tapez "b" pour retourner au menu MTP
+echo Tapez "e" pour retourner au programme principal
+echo.
+set /p bs="Faites votre choix: "
+set "v_MTP_ptch_install_spec=none"
+if /i "%bs%"=="1" set "v_MTP_ptch_install_spec=spec1"
+if /i "%bs%"=="2" set "v_MTP_ptch_install_spec=legacy"
+if /i "%bs%"=="d" set "v_MTP_ptch_install_spec=spec1"
+
+if /i "%bs%"=="0" goto sc1
+if /i "%bs%"=="b" goto MTP
+if /i "%bs%"=="e" goto salida
+
+if "%v_MTP_ptch_install_spec%"=="none" echo Mauvais choix
+if "%v_MTP_ptch_install_spec%"=="none" echo.
+if "%v_MTP_ptch_install_spec%"=="none" goto op_MTP_ptch_install_spec
+
+set v_MTP_ptch_install_spec="MTP_ptch_inst_spec=%v_MTP_ptch_install_spec%"
+set v_MTP_ptch_install_spec="%v_MTP_ptch_install_spec%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "182" -nl "set %v_MTP_ptch_install_spec%"
+echo.
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "182" -nl "La ligne dans la configuration a été remplacée par: "
+echo.
+pause
+goto MTP
+
+:op_mtp_defaults
+cls
+call :logo
+::MTP_verification
+set v_mtp_verification="MTP_verification=True"
+set v_mtp_verification="%v_mtp_verification%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "166" -nl "set %v_mtp_verification%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "166" -nl "La ligne de configuration a été remplacée par: "
+::MTP_prioritize_NSZ
+set v_MTP_prioritize_NSZ="MTP_prioritize_NSZ=True"
+set v_MTP_prioritize_NSZ="%v_MTP_prioritize_NSZ%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "167" -nl "set %v_MTP_prioritize_NSZ%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "167" -nl "La ligne de configuration a été remplacée par: "
+::MTP_exclude_xci_autinst
+set v_MTP_exclude_xci_autinst="MTP_exclude_xci_autinst=True"
+set v_MTP_exclude_xci_autinst="%v_MTP_exclude_xci_autinst%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "168" -nl "set %v_MTP_exclude_xci_autinst%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "168" -nl "La ligne de configuration a été remplacée par: "
+::MTP_aut_ch_medium
+set v_MTP_aut_ch_medium="MTP_aut_ch_medium=True"
+set v_MTP_aut_ch_medium="%v_MTP_aut_ch_medium%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "169" -nl "set %v_MTP_aut_ch_medium%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "169" -nl "La ligne de configuration a été remplacée par: "
+::MTP_chk_fw
+set v_MTP_chk_fw="MTP_chk_fw=False"
+set v_MTP_chk_fw="%v_MTP_chk_fw%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "170" -nl "set %v_MTP_chk_fw%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "170" -nl "La ligne de configuration a été remplacée par: "
+::MTP_prepatch_kg
+set v_MTP_prepatch_kg="MTP_chk_fw=False"
+set v_MTP_prepatch_kg="%v_MTP_prepatch_kg%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "171" -nl "set %v_MTP_prepatch_kg%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "171" -nl "La ligne de configuration a été remplacée par: "
+::MTP_prechk_Base
+set v_MTP_prechk_Base="MTP_prechk_Base=True"
+set v_MTP_prechk_Base="%v_MTP_prechk_Base%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "173" -nl "set %v_MTP_prechk_Base%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "173" -nl "La ligne de configuration a été remplacée par: "
+::MTP_prechk_Upd
+set v_MTP_prechk_Upd="MTP_prechk_Upd=False"
+set v_MTP_prechk_Upd="%v_MTP_prechk_Upd%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "174" -nl "set %v_MTP_prechk_Upd%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "174" -nl "La ligne de configuration a été remplacée par: "
+::MTP_saves_Inline
+set v_MTP_saves_Inline="MTP_saves_Inline=False"
+set v_MTP_saves_Inline="%v_MTP_saves_Inline%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "176" -nl "set %v_MTP_saves_Inline%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "176" -nl "La ligne de configuration a été remplacée par: "
+::MTP_saves_AddTIDandVer
+set v_MTP_saves_AddTIDandVer="MTP_saves_AddTIDandVer=False"
+set v_MTP_saves_AddTIDandVer="%v_MTP_saves_AddTIDandVer%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "177" -nl "set %v_MTP_saves_AddTIDandVer%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "177" -nl "La ligne de configuration a été remplacée par: "
+::MTP_pdrive_truecopy
+set v_op_MTP_pdrive_truecopy="MTP_pdrive_truecopy=True"
+set v_op_MTP_pdrive_truecopy="%v_op_MTP_pdrive_truecopy%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "179" -nl "set %v_op_MTP_pdrive_truecopy%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "179" -nl "La ligne de configuration a été remplacée par: "
+::MTP_standard_crypto
+set v_MTP_standard_crypto="MTP_stc_installs=False"
+set v_MTP_standard_crypto="%v_MTP_standard_crypto%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "181" -nl "set %v_MTP_standard_crypto%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "181" -nl "La ligne de configuration a été remplacée par: "
+::MTP_ptch_install_spec
+set v_MTP_ptch_install_spec="MTP_ptch_inst_spec=spec1"
+set v_MTP_ptch_install_spec="%v_MTP_ptch_install_spec%"
+%pycommand% "%listmanager%" -cl "%op_file%" -ln "182" -nl "set %v_MTP_ptch_install_spec%"
+%pycommand% "%listmanager%" -rl "%op_file%" -ln "182" -nl "La ligne de configuration a été remplacée par: "
+pause
 goto sc1
 
 :salida
 exit /B
 
 :logo
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -1666,11 +2753,10 @@ ECHO =============================     BY JULESONTHEROAD     ===================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
 ECHO "                    BASED IN THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                     VERSION %program_version%
-ECHO -------------------------------------------------------------------------------------                   
+ECHO                                    VERSION %program_version%
+ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B

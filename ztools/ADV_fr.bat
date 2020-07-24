@@ -65,21 +65,25 @@ echo ................................................
 
 :manual_INIT
 endlocal
-ECHO ******************************************************
-echo Tapez "1" pour ajouter un dossier à la liste
-echo Tapez "2" pour ajouter un fichier à la liste
+ECHO **********************************************************************
+echo Tapez "1" pour ajouter un dossier à la liste via le sélecteur
+echo Tapez "2" pour ajouter un fichier à la liste via le sélecteur
+echo Tapez "3" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "4" pour sélectionner des fichiers via le navigateur de dossiers
 echo Tapez "0" pour revenir au menu du mode de sélection
-ECHO ******************************************************
+ECHO **********************************************************************
 echo.
-%pycommand% "%nut%" -t nsp xci nsx nsz xcz -tfile "%prog_dir%advlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci nsx nsz xcz -tfile "%prog_dir%advlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
 echo+ >"%uinput%"
 endlocal
 if /i "%eval%"=="0" exit /B
-if /i "%eval%"=="1" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=folder ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=file ext="nsp xci nsx nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=folder ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=file ext="nsp xci nsx nsz xcz" )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%advlist.txt" "extlist=nsp xci nsx nsz xcz" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%advlist.txt" "extlist=nsp xci nsx nsz xcz" )
 goto checkagain
 echo.
 :checkagain
@@ -88,8 +92,10 @@ echo ...........................................................................
 echo "Déposez un autre fichier ou dossier et appuyez sur enter pour ajouter des fichiers à la liste"
 echo.
 echo Tapez "1" pour commencer le traitement
-echo Tapez "2" pour ajouter un autre dossier à la liste
-echo Tapez "3" pour ajouter un autre fichier à la liste
+echo Tapez "2" pour ajouter un autre dossier à la liste via le sélecteur
+echo Tapez "3" pour ajouter un autre fichier à la liste via le sélecteur
+echo Tapez "4" pour sélectionner des fichiers via les bibliothèques locales
+echo Tapez "5" pour sélectionner des fichiers via le navigateur de dossiers
 echo Tapez "e" Pour sortir
 echo Tapez "i" pour voir la liste des fichiers à traiter
 echo Tapez "r" pour supprimer des fichiers (en partant du bas)
@@ -99,7 +105,7 @@ ECHO ******************************************************
 echo Ou Tapez "0" pour revenir au menu du mode de sélection
 ECHO ******************************************************
 echo.
-%pycommand% "%nut%" -t nsp xci nsx nsz xcz -tfile "%prog_dir%advlist.txt" -uin "%uinput%" -ff "uinput"
+%pycommand% "%squirrel%" -t nsp xci nsx nsz xcz -tfile "%prog_dir%advlist.txt" -uin "%uinput%" -ff "uinput"
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 setlocal enabledelayedexpansion
@@ -108,8 +114,10 @@ endlocal
 
 if /i "%eval%"=="0" exit /B
 if /i "%eval%"=="1" goto start
-if /i "%eval%"=="2" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=folder ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%nut%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=file ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=folder ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%advlist.txt" mode=file ext="nsp xci nsx nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%advlist.txt" "extlist=nsp xci nsx nsz xcz" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%advlist.txt" "extlist=nsp xci nsx nsz xcz" )
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto showlist
 if /i "%eval%"=="r" goto r_files
@@ -134,7 +142,7 @@ set string=
 :update_list1
 if !pos1! GTR !pos2! ( goto :update_list2 ) else ( set /a pos1+=1 )
 set string=%string%,%pos1%
-goto :update_list1 
+goto :update_list1
 :update_list2
 set string=%string%,
 set skiplist=%string%
@@ -184,9 +192,9 @@ echo Tapez "3" pour extraire tous les fichiers nca en texte clair
 echo Tapez "4" pour extraire le contenu nca du nsp \ xci
 echo Tapez "5" pour patcher la demande de compte lié
 echo.
-ECHO ******************************************
+ECHO *************************************************
 echo Ou tapez "b" pour revenir aux options de la liste
-ECHO ******************************************
+ECHO *************************************************
 echo.
 set /p bs="Faites votre choix: "
 set bs=%bs:"=%
@@ -209,9 +217,9 @@ echo ********************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -x ""
+%pycommand% "%squirrel%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -x ""
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO -------------------------------------------------------------
@@ -228,9 +236,9 @@ echo ********************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -raw_x ""
+%pycommand% "%squirrel%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -raw_x ""
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO -------------------------------------------------------------
@@ -247,9 +255,9 @@ echo ************************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -plx ""
+%pycommand% "%squirrel%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -plx ""
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO -------------------------------------------------------------
@@ -266,9 +274,9 @@ echo ********************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -nfx ""
+%pycommand% "%squirrel%" %buffer% -o "%prog_dir%NSCB_extracted" -tfile "%prog_dir%advlist.txt" -nfx ""
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -307,9 +315,9 @@ echo ********************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
 
-%pycommand% "%nut%" %buffer% -tfile "%prog_dir%advlist.txt" --remlinkacc ""
+%pycommand% "%squirrel%" %buffer% -tfile "%prog_dir%advlist.txt" --remlinkacc ""
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -325,10 +333,10 @@ echo Patcher une demande de compte lié
 echo ********************************************************
 CD /d "%prog_dir%"
 for /f "tokens=*" %%f in (advlist.txt) do (
-%pycommand% "%nut%" %buffer% %skdelta% --xml_gen "true" -o "%w_folder%" -tfile "%prog_dir%advlist.txt" --rebuild_nsp ""
-%pycommand% "%nut%" %buffer% -o "%w_folder%" -tfile "%prog_dir%advlist.txt" --xci_trim ""
-%pycommand% "%nut%" -t nsp xci nsz xcz -tfile "%prog_dir%templist.txt" -ff "%w_folder%"
-%pycommand% "%nut%" %buffer% -tfile "%prog_dir%templist.txt" --remlinkacc ""
+%pycommand% "%squirrel%" %buffer% %skdelta% --xml_gen "true" -o "%w_folder%" -tfile "%prog_dir%advlist.txt" --rebuild_nsp ""
+%pycommand% "%squirrel%" %buffer% -o "%w_folder%" -tfile "%prog_dir%advlist.txt" --xci_trim ""
+%pycommand% "%squirrel%" -t nsp xci nsz xcz -tfile "%prog_dir%templist.txt" -ff "%w_folder%"
+%pycommand% "%squirrel%" %buffer% -tfile "%prog_dir%templist.txt" --remlinkacc ""
 
 move "%w_folder%\*.xci" "%fold_output%" >NUL 2>&1
 move "%w_folder%\*.xcz" "%fold_output%" >NUL 2>&1
@@ -338,7 +346,7 @@ move "%w_folder%\*.nsz" "%fold_output%" >NUL 2>&1
 move "%w_folder%\*.ns*" "%fold_output%" >NUL 2>&1
 if exist "%w_folder%\*.zip" ( MD "%zip_fold%" ) >NUL 2>&1
 move "%w_folder%\*.zip" "%zip_fold%" >NUL 2>&1
-if exist "%w_folder%\archfolder" ( %pycommand% "%nut%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\%filename%.nsp" )
+if exist "%w_folder%\archfolder" ( %pycommand% "%squirrel%" -ifo "%w_folder%\archfolder" -archive "%fold_output%\%filename%.nsp" )
 
 RD /S /Q "%w_folder%" >NUL 2>&1
 echo Terminé
@@ -346,7 +354,7 @@ call :thumbup
 call :delay
 if exist templist.txt del templist.txt
 
-%pycommand% "%nut%" --strip_lines "%prog_dir%advlist.txt"
+%pycommand% "%squirrel%" --strip_lines "%prog_dir%advlist.txt"
 call :contador_NF
 )
 ECHO ------------------------------------------------------------
@@ -397,17 +405,17 @@ echo          /_', "=. ';:;:;
 echo          @=:__,  \,;:;:'
 echo            _(\.=  ;:;;'
 echo           `"_(  _/="`
-echo            `"'		
+echo            `"'
 exit /B
 
 :program_logo
 
-ECHO                                        __          _ __    __         
+ECHO                                        __          _ __    __
 ECHO                  ____  _____ ____     / /_  __  __(_) /___/ /__  _____
 ECHO                 / __ \/ ___/ ___/    / __ \/ / / / / / __  / _ \/ ___/
-ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /    
-ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/     
-ECHO                              /_____/                                  
+ECHO                / / / (__  ) /__     / /_/ / /_/ / / / /_/ /  __/ /
+ECHO               /_/ /_/____/\___/____/_.___/\__,_/_/_/\__,_/\___/_/
+ECHO                              /_____/
 ECHO -------------------------------------------------------------------------------------
 ECHO                         NINTENDO SWITCH CLEANER AND BUILDER
 ECHO                      (THE XCI MULTI CONTENT BUILDER AND MORE)
@@ -420,7 +428,6 @@ ECHO                                     VERSION %program_version%
 ECHO -------------------------------------------------------------------------------------                   
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar
-ECHO Blawar's tinfoil: https://github.com/digableinc/tinfoil
 ECHO Luca Fraga's github: https://github.com/LucaFraga
 ECHO -------------------------------------------------------------------------------------
 exit /B
@@ -446,5 +453,3 @@ exit /B
 
 :salida
 exit /B
-
-

@@ -15,13 +15,13 @@ set "zip_fold=NSCB_zips"
 ::OPTION 2: PROGRAM ROUTES
 ::--------------------------------------------------------------
 set "nut=ztools\squirrel.exe"
-set "xci_lib=ztools\XCI.bat"
-set "nsp_lib=ztools\NSP.bat"
+set "xci_lib=ztools\XCI_fr.bat"
+set "nsp_lib=ztools\NSP_fr.bat"
 set "zip=ztools\squirrel.exe"
 set "listmanager=ztools\squirrel.exe"
-set "batconfig=ztools\NSCB_config.bat"
+set "batconfig=ztools\NSCB_config_fr.bat"
 set "batdepend=ztools\install_dependencies.bat"
-set "infobat=ztools\info.bat"
+set "infobat=ztools\info_fr.bat"
 ::--------------------------------------------------------------
 ::OPTION 3: SQUIRREL OPTIONS
 ::--------------------------------------------------------------
@@ -159,3 +159,25 @@ set "workers=-threads 1"
 set compression_lv=17
 set compression_threads=0
 set "xci_export=xcz"
+
+::--------------------------------------------------------------
+::MTP
+::--------------------------------------------------------------
+set "MTP=ztools\bin\nscb_mtp.exe"
+set "MTP_verification=True"
+set "MTP_prioritize_NSZ=True"
+set "MTP_exclude_xci_autinst=True"
+set "MTP_aut_ch_medium=True"
+set "MTP_chk_fw=False"
+set "MTP_prepatch_kg=False"
+:: Precheck if Installed
+set "MTP_prechk_Base=True"
+set "MTP_prechk_Upd=False"
+:: Save Dumping
+set "MTP_saves_Inline=False"
+set "MTP_saves_AddTIDandVer=False"
+:: Activate truecopy for public google drive cache or use symlinks
+set "MTP_pdrive_truecopy=True"
+:: Advanced installation options
+set "MTP_stc_installs=False"
+set "MTP_ptch_inst_spec=spec1"
