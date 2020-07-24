@@ -1,4 +1,7 @@
 @ECHO OFF
+chcp 65001 >nul
+set "program_version=1.00C"
+
 :TOP_INIT
 set "prog_dir=%~dp0"
 set "bat_name=%~n0"
