@@ -1,5 +1,5 @@
 # NSC_Builder-Batch-FR-Translation
-Traduction française de la partie batch de NSC_Builder 1.00c
+Traduction française de la partie batch de NSC_Builder 1.00d
 
 ## Installation:
 
