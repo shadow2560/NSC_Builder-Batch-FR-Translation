@@ -1,6 +1,6 @@
 @ECHO OFF
 chcp 65001 >nul
-set "program_version=1.00B"
+set "program_version=1.01"
 
 :TOP_INIT
 CD /d "%prog_dir%"
@@ -567,7 +567,7 @@ echo Tapez "7" pour changer la keygeneration à 7 (FW 6.2.0)
 echo Tapez "8" pour changer la keygeneration à 8 (FW 7.0.0-8.0.1)
 echo Tapez "9" pour changer la keygeneration à 9 (FW 8.1.0)
 echo Tapez "10" pour changer la keygeneration à 10 (FW 9.0.0-9.01)
-echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0)
+echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0-10.2.0)
 echo.
 ECHO **************************************************
 echo Ou tapez "b" pour revenir aux options de la liste.
@@ -981,7 +981,7 @@ echo Tapez "7" pour changer la keygeneration à 7 (FW 6.2.0)
 echo Tapez "8" pour changer la keygeneration à 8 (FW 7.0.0-8.0.1)
 echo Tapez "9" pour changer la keygeneration à 9 (FW 8.1.0)
 echo Tapez "10" pour changer la keygeneration à 10 (FW 9.0.0-9.01)
-echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0)
+echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0-10.2.0)
 echo.
 ECHO **************************************************
 echo Ou tapez "b" pour revenir aux options de la liste.
@@ -1544,14 +1544,14 @@ echo.
 )
 if "%basecheck%" EQU "false" ( goto upd_ADD_BASE)
 if not exist "UPDlist.txt" goto upd_ADD_UPD_FILES
-ECHO ..................................................................
+ECHO .........................................................................................
 ECHO Une précédente liste de fichiers à mettre à jour a été trouvée. Que souhaitez-vous faire?
 :upd_prevlist0
-ECHO ..................................................................
+ECHO .........................................................................................
 echo Tapez "1" pour commencer à mettre à jour le contenu de base.
 echo Tapez "2" pour supprimer la liste et en faire une nouvelle.
 echo Tapez "3" pour continuer à constuire la liste.
-echo ..................................................................
+echo .........................................................................................
 echo NOTE: En appuyant sur 3 vous verrez la liste précédente que vous 
 echo       pourrez modifier avant de lancer son traitement.
 echo.
@@ -1594,10 +1594,10 @@ ECHO.
 set /p eval=<"%uinput%"
 set eval=%eval:"=%
 if /i "%eval%"=="0" goto manual_Reentry
-if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
-if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="1" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" False False True )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
 
 goto upd_checkagain
 
@@ -1633,10 +1633,10 @@ endlocal
 
 if /i "%eval%"=="0" goto manual_Reentry
 if /i "%eval%"=="1" goto upd_starts
-if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" )  2>&1>NUL
-if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
-if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="2" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=folder ext="nsp xci" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%UPDlist.txt" mode=file ext="nsp xci" False False True )  2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%UPDlist.txt" "extlist=nsp xci" )
 if /i "%eval%"=="6" goto upd_ADD_BASE
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto upd_showlist
@@ -1802,7 +1802,7 @@ echo Tapez "7" pour changer la keygeneration à 7 (FW 6.2.0)
 echo Tapez "8" pour changer la keygeneration à 8 (FW 7.0.0-8.0.1)
 echo Tapez "9" pour changer la keygeneration à 9 (FW 8.1.0)
 echo Tapez "10" pour changer la keygeneration à 10 (FW 9.0.0-9.01)
-echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0)
+echo Tapez "11" pour changer la keygeneration à 11 (FW 9.1.0-10.2.0)
 echo.
 ECHO **************************************************
 echo Ou tapez "b" pour revenir aux options de la liste.
@@ -2285,7 +2285,7 @@ ECHO =============================     BY JULESONTHEROAD     ===================
 ECHO -------------------------------------------------------------------------------------
 ECHO "                                POWERED BY SQUIRREL                                "
 ECHO "                    BASED ON THE WORK OF BLAWAR AND LUCA FRAGA                     "
-ECHO                                  VERSION 1.00 (LEGACY)
+ECHO                                  VERSION 1.01 (LEGACY)
 ECHO -------------------------------------------------------------------------------------
 ECHO Program's github: https://github.com/julesontheroad/NSC_BUILDER
 ECHO Blawar's github:  https://github.com/blawar

@@ -15,7 +15,7 @@ echo.
 echo Tapez "N" pour accéder au MODE STANDARD
 echo Tapez "M" pour accéder au MODE MTP
 echo Tapez "D" pour accéder à GOOGLE DRIVE 
-echo Tapez "L" pour accéder au ancien MODE
+echo Tapez "L" pour accéder à l'ancien MODE
 echo ..........................................................
 echo.
 set /p bs="Faite votre choix: "
@@ -39,13 +39,13 @@ exit /B
 :DOWNLOADMODE
 cls
 call :program_logo
-%pycommand% "%squirrel%" -lib_call Drive.Download Interface
+%pycommand% "%squirrel_lb%" -lib_call Drive.Download Interface
 goto MAIN
 
 :INFMODE
 cls
 call :program_logo
-%pycommand% "%squirrel%" -lib_call Drive.Info Interface
+%pycommand% "%squirrel_lb%" -lib_call Drive.Info Interface
 goto MAIN
 
 ::///////////////////////////////////////////////////

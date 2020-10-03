@@ -82,10 +82,10 @@ setlocal enabledelayedexpansion
 echo+ >"%uinput%"
 endlocal
 if /i "%eval%"=="0" exit /B
-if /i "%eval%"=="1" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
-if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="1" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="2" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" False False True )  2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="4" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
 
 goto checkagain
 echo.
@@ -117,10 +117,10 @@ endlocal
 
 if /i "%eval%"=="0" exit /B
 if /i "%eval%"=="1" goto start
-if /i "%eval%"=="2" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
-if /i "%eval%"=="3" ( %pycommand% "%squirrel%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" )  2>&1>NUL
-if /i "%eval%"=="4" ( %pycommand% "%squirrel%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
-if /i "%eval%"=="5" ( %pycommand% "%squirrel%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="2" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=folder ext="nsp xci nsz xcz" ) 2>&1>NUL
+if /i "%eval%"=="3" ( %pycommand% "%squirrel_lb%" -lib_call listmanager selector2list -xarg "%prog_dir%zzlist.txt" mode=file ext="nsp xci nsz xcz" False False True )  2>&1>NUL
+if /i "%eval%"=="4" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker select_from_local_libraries -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
+if /i "%eval%"=="5" ( %pycommand% "%squirrel_lb%" -lib_call picker_walker get_files_from_walk -xarg "%prog_dir%zzlist.txt" "extlist=nsp xci nsz xcz" )
 if /i "%eval%"=="e" goto salida
 if /i "%eval%"=="i" goto showlist
 if /i "%eval%"=="r" goto r_files
@@ -202,7 +202,7 @@ if /i "%bs%"=="b" goto checkagain
 if /i "%bs%"=="1" goto compression_presets_menu
 if /i "%bs%"=="2" goto pararell_compress
 if /i "%bs%"=="3" goto decompress
-if %choice%=="none" goto s_cl_wrongchoice
+if "%choice%"=="none" goto s_cl_wrongchoice
 
 
 :compression_presets_wrongchoice
@@ -287,7 +287,7 @@ if /i "%bs%"=="x" goto checkagain
 if /i "%bs%"=="b" goto compression_presets_menu
 if /i "%bs%"=="d" set "bs=17"
 set "level=%bs%"
-if %choice%=="none" goto levels_wrongchoice
+if "%choice%"=="none" goto levels_wrongchoice
 goto threads
 :threads_wrongchoice
 echo Mauvais choix
@@ -310,14 +310,14 @@ echo Ou tapez "b" pour revenir à l'option précédente
 echo Ou tapez "x" pour revenir aux options de la liste
 ECHO ************************************************
 echo.
-set /p bs="Entrez le nombre de treads: "
+set /p bs="Entrez le nombre de treads [-1;0-4]: "
 set bs=%bs:"=%
-set choice=none
+set workers=none
 if /i "%bs%"=="x" goto checkagain
 if /i "%bs%"=="b" goto levels
 if /i "%bs%"=="d" set "bs=0"
 set "workers=%bs%"
-if %choice%=="none" goto threads_wrongchoice
+if "%workers%"=="none" goto threads_wrongchoice
 
 :compress
 cls
@@ -326,7 +326,7 @@ echo ***************************************
 echo Compression d'un NSP /XCI
 echo ***************************************
 CD /d "%prog_dir%"
-%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
+%pycommand% "%squirrel_lb%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
 for /f "tokens=*" %%f in (zzlist.txt) do (
 
 %pycommand% "%squirrel%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%"
@@ -369,12 +369,13 @@ ECHO ********************************************************
 echo.
 set /p bs="Tapez le nombre d'instances [>1]: "
 set bs=%bs:"=%
-set choice=none
+set workers=none
 if /i "%bs%"=="x" goto checkagain
 if /i "%bs%"=="b" goto start
 if /i "%bs%"=="d" set "bs=4"
 set "workers=%bs%"
-if %choice%=="none" goto pararell_compress_wrongchoice
+if "%workers%"=="none" goto pararell_compress_wrongchoice
+goto pararell_levels
 
 :pararell_levels_wrongchoice
 echo mauvais choix
@@ -397,12 +398,12 @@ ECHO *******************************************************
 echo.
 set /p bs="Entrez le niveau de compression [1-22]: "
 set bs=%bs:"=%
-set choice=none
+set level=none
 if /i "%bs%"=="x" goto checkagain
 if /i "%bs%"=="b" goto pararell_compress
 if /i "%bs%"=="d" set "bs=17"
 set "level=%bs%"
-if %choice%=="none" goto pararell_levels_wrongchoice
+if "%level%"=="none" goto pararell_levels_wrongchoice
 goto pcompress
 :pcompress
 cls
@@ -412,10 +413,10 @@ echo Compression parallèle de NSP\XCI
 echo ********************************
 CD /d "%prog_dir%"
 echo Filtrer les extensions de la liste
-%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
+%pycommand% "%squirrel_lb%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsp xci","token=False",Print="False"
 echo Tri de la liste par taille des fichiers
-%pycommand% "%squirrel%" -lib_call listmanager size_sorted_from_tfile -xarg "%prog_dir%zzlist.txt"
-echo Start compression by batches of "%workers%"
+%pycommand% "%squirrel_lb%" -lib_call listmanager size_sorted_from_tfile -xarg "%prog_dir%zzlist.txt"
+echo Lancer la compression par lots de "%workers%"
 %pycommand% "%squirrel%" %buffer% -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --compress "%level%" --threads "%workers%" --nodelta "%skdelta%" --fexport "%xci_export%" --pararell "true"
 
 ECHO ------------------------------------------------------------
@@ -430,7 +431,7 @@ echo **************************
 echo Décompression d'un NSZ/XCZ
 echo **************************
 CD /d "%prog_dir%"
-%pycommand% "%squirrel%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsz xcz","token=False",Print="False"
+%pycommand% "%squirrel_lb%" -lib_call listmanager filter_list "%prog_dir%zzlist.txt","ext=nsz xcz","token=False",Print="False"
 for /f "tokens=*" %%f in (zzlist.txt) do (
 
 %pycommand% "%squirrel%" -o "%fold_output%" -tfile "%prog_dir%zzlist.txt" --decompress "auto"

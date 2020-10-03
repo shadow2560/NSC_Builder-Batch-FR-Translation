@@ -231,7 +231,7 @@ echo Tapez "7" pour configurer la keygeneration à 7 (FW 6.2.0)
 echo Tapez "8" pour configurer la keygeneration à 8 (FW 7.0.0-8.0.1)
 echo Tapez "9" pour configurer la keygeneration à 9 (FW 8.1.0)
 echo Tapez "10" pour configurer la keygeneration à 10 (FW 9.0.0-9.01)
-echo Tapez "11" pour configurer la keygeneration à 11 (FW 9.1.0)
+echo Tapez "11" pour configurer la keygeneration à 11 (FW 9.1.0-10.2.0)
 echo.
 echo Tapez "b" pour revenir au menu de configuration du mode automatique
 echo Tapez "c" pour revenir au menu de configuration
@@ -1410,7 +1410,7 @@ echo ***************************************************************************
 echo Forcer la mise à jour de NUT_DB 
 echo ***************************************************************************
 
-%pycommand% "%squirrel%" -lib_call nutdb force_refresh
+%pycommand% "%squirrel_lb%" -lib_call nutdb force_refresh
 
 echo ...........................................................................
 echo Tapez "0" pour revenir au menu de configuration
@@ -1438,7 +1438,7 @@ echo .......................................................
 echo.
 set /p bs="Faites votre choix: "
 if /i "%bs%"=="1" goto op_google_drive_account
-if /i "%bs%"=="2" ( %pycommand% "%squirrel%" -lib_call workers concurrent_cache )
+if /i "%bs%"=="2" ( %pycommand% "%squirrel_lb%" -lib_call workers concurrent_cache )
 if /i "%bs%"=="2" goto google_drive
 
 if /i "%bs%"=="0" goto sc1
@@ -1468,7 +1468,7 @@ echo.
 set /p bs="Tapez le nom du lecteur: "
 set "token=%bs%"
 echo.
-%pycommand% "%squirrel%" -lib_call Drive.Private create_token -xarg "%token%" headless="False"
+%pycommand% "%squirrel_lb%" -lib_call Drive.Private create_token -xarg "%token%" headless="False"
 pause
 goto google_drive
 
@@ -1478,7 +1478,7 @@ call :logo
 echo ********************************************************
 echo INTERFACE - CONFIGURATION
 echo ********************************************************
-echo Input "1" pour modifier la configuration de VISIBILITÉ DE DÉMARRAGE
+echo Tapez "1" pour modifier la configuration de VISIBILITÉ DE DÉMARRAGE
 echo Tapez "2" pour choisir un NAVIGATEUR pour l'interface 
 echo Tapez "3" pour désactiver la LECTURE VIDÉO
 echo Tapez "4" pour configurer PORT
@@ -1490,7 +1490,7 @@ echo Tapez "0" pour revenir au MENU de CONFIGURATION
 echo Tapez "e" pour revenir au programme principal
 echo .......................................................
 echo.
-set /p bs="Enter your choice: "
+set /p bs="Faites votre choix: "
 if /i "%bs%"=="1" goto op_interface_consolevisibility
 if /i "%bs%"=="2" goto op_interface_browser
 if /i "%bs%"=="3" goto op_interface_video_playback
@@ -1522,7 +1522,7 @@ echo Tapez "0" pour revenir au menu de configuration
 echo Tapez "b" pour revenir au menu de l'interface
 echo Tapez "e" pour revenir au programme principal
 echo.
-set /p bs="Faites votre: "
+set /p bs="Faites votre choix: "
 set "v_interface=none"
 if /i "%bs%"=="1" set "v_interface=yes"
 if /i "%bs%"=="2" set "v_interface=no"
@@ -2351,7 +2351,7 @@ echo car la possibilité de patcher des flux à la volée n'est pas encore impl�
 echo le crochet mtp.
 echo.
 echo Tapez "1" ou "D" pour NE PAS PATCHER LES FICHIERS (par défaut)
-echo Input "2" pour PATCHER LES FICHIERS
+echo Tapez "2" pour PATCHER LES FICHIERS
 echo.
 echo Tapez "0" pour retourner au menu de configuration
 echo Tapez "b" pour retourner au menu MTP
@@ -2390,7 +2390,7 @@ echo Si activé, si un jeu de base est dans la console, l'installation sera igno
 echo Si elle est désactivée, l'installation sera écrasée.
 echo.
 echo Tapez "1" ou "D" pour VÉRIFIER ET SAUTER LES JEUX DÉJÀ INSTALLÉS (par défaut)
-echo Input "2" pour NE PAS vérifier et ignorer les jeux déjà installés
+echo Tapez "2" pour NE PAS vérifier et ignorer les jeux déjà installés
 echo.
 echo Tapez "0" pour retourner au menu de configuration
 echo Tapez "b" pour retourner au menu MTP
@@ -2433,7 +2433,7 @@ echo Si elle est désactivée, elle permet d'installer des mises à jour ou dlc 
 echo les mises à jour avec le même numéro de version.
 echo.
 echo Tapez "1" ou "D" pour NE PAS VÉRIFIER ET SAUTER les mises à jour ou dlc déjà installé (par défaut)
-echo Input "2" pour vérifier et sauter les mises à jour ou dlc déjà installé
+echo Tapez "2" pour vérifier et sauter les mises à jour ou dlc déjà installé
 echo.
 echo Tapez "0" pour retourner au menu de configuration
 echo Tapez "b" pour retourner au menu MTP
@@ -2627,7 +2627,7 @@ goto MTP
 cls
 call :logo
 echo ***************************************************************************
-echo PÉCIFICATION POUR L'INSTALLATION DE NSP ET XCI PATCHÉS
+echo SPÉCIFICATION POUR L'INSTALLATION DE NSP ET XCI PATCHÉS
 echo ***************************************************************************
 echo Legacy crée le fichier corrigé ou le fichier converti, puis le transfère vers la
 echo console.
